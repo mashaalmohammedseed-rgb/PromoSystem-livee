@@ -55,3 +55,31 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;
         grid-template-columns: 1fr;
     }
 }
+
+/* Referral Section Styling */
+#referralSection input[type="text"] {
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+#referralSection .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Dashboard Table Styling (Ensuring it looks good with the new data) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: right;
+}
+th {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f5c16c;
+}

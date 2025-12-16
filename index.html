@@ -18,8 +18,9 @@
 
     <!-- Hero Section -->
     <div class="card hero">
-      <h1>ابدأ رحلتك مع المكافآت الترويجية</h1>
-      <p>الطريقة الأسهل للاستفادة من المكافآت بدون أي رأس مال</p>
+      <h1>فرصة نادرة للربح بدون ما تدفع ولا ريال!</h1>
+      <p>سجّل الآن واحصل على بونص تداول مجاني بقيمة 30$ 💵</p>
+      <p>**ميزة جديدة:** ادعُ أصدقائك واربح 30% من أرباحهم! قد تصل أرباحك إلى 100$ وأكثر لكل صديق!</p>
       <a href="#formSection" class="btn">ابدأ الآن</a>
     </div>
 
@@ -28,8 +29,9 @@
       <h2 class="title">إحصائيات تقريبية</h2>
       <div class="stats">
         <div class="stat">مستخدمون<span class="counter">2500</span></div>
-        <div class="stat">محاولات ناجحة<span class="counter">1200</span></div>
-        <div class="stat">نتائج محتملة بالدولار<span class="counter">500</span></div>
+        <div class="stat">تقسيم الأرباح (الأساسي)<span class="counter">50/50</span></div>
+        <div class="stat">أرباح محتملة<span class="counter">50</span></div>
+        <div class="stat">أرباح محققة<span class="counter">500</span></div>
       </div>
     </div>
 
@@ -51,6 +53,14 @@
         <div class="faq-a">نعم، التسجيل مجاني بالكامل.</div>
       </div>
       <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">ما هو نظام تقسيم الأرباح؟</div>
+        <div class="faq-a">نظام الأرباح الأساسي: الربح بيتقسم بينّا — 50% لك و 50% لي.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">كيف يعمل نظام دعوة الأصدقاء؟</div>
+        <div class="faq-a">عندما تدعو صديقاً، تحصل أنت وصديقك على 30% من أرباحه، ونحصل نحن على 40% فقط. هذا يعني أنك تربح 30% من أرباح صديقك، وقد تصل هذه النسبة إلى 100$ وأكثر!</div>
+      </div>
+      <div class="faq-item">
         <div class="faq-q" onclick="toggleFAQ(this)">هل الأرباح مضمونة؟</div>
         <div class="faq-a">النتائج تختلف من شخص لآخر حسب طريقة الاستخدام.</div>
       </div>
@@ -58,14 +68,14 @@
 
     <!-- Registration Form -->
     <div class="card" id="formSection">
-      <h2 class="title">سجّل الآن للحصول على المكافأة</h2>
-      <p>يرجى إدخال بياناتك كما هي مكتوبة في بطاقة الهوية أو جواز السفر</p>
+      <h2 class="title">سجّل الآن للحصول على بونص 30$</h2>
+      <p>الشرط الوحيد: يكون لديك أحد المستندات التالية للتسجيل في الشركة.</p>
       <form id="regForm">
-        <input type="text" id="name" placeholder="الاسم الكامل (كما في البطاقة)" required>
-        <input type="tel" id="phone" placeholder="رقم الهاتف" required>
-        <input type="text" id="country" placeholder="الدولة (كما في البطاقة)" required>
-        <select id="document" required>
-          <option value="">اختر نوع المستند</option>
+        <input type="text" id="name" placeholder="الاسم الأول + الأخير (كما في الهوية)" required>
+        <input type="tel" id="phone" placeholder="رقم الهاتف (اختياري)">
+        <input type="text" id="country" placeholder="الدولة" required>
+        <select id="document">
+          <option value="">اختر نوع المستند (للتأكيد)</option>
           <option>بطاقة شخصية</option>
           <option>جواز سفر</option>
           <option>إقامة</option>
@@ -74,6 +84,14 @@
         <button class="btn" type="submit">إرسال البيانات</button>
       </form>
       <div class="msg" id="status"></div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="card" id="referralSection">
+      <h2 class="title">رابط الدعوة الخاص بك</h2>
+      <p>شارك هذا الرابط مع أصدقائك لتربح 30% من أرباحهم:</p>
+      <input type="text" id="referralLink" readonly>
+      <button class="btn" onclick="copyReferralLink()">نسخ الرابط</button>
     </div>
 
     <!-- Dashboard -->
