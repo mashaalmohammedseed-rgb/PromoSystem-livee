@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>برنامج المكافآت الترويجية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><span>جاري التحميل...</span></div>
+
+<div id="main">
+  <div class="nav">نظام التسجيل الذكي</div>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <div class="card hero">
+      <h1>ابدأ رحلتك مع المكافآت الترويجية</h1>
+      <p>الطريقة الأسهل للاستفادة من المكافآت بدون أي رأس مال</p>
+      <a href="#formSection" class="btn">ابدأ الآن</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="card" id="statsSection">
+      <h2 class="title">إحصائيات تقريبية</h2>
+      <div class="stats">
+        <div class="stat">مستخدمون<span class="counter">2500</span></div>
+        <div class="stat">محاولات ناجحة<span class="counter">1200</span></div>
+        <div class="stat">نتائج محتملة بالدولار<span class="counter">500</span></div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="card">
+      <h2 class="title">تجارب المستخدمين</h2>
+      <div class="testimonials">
+        <div class="comment">"تجربة ممتازة وسهلة في التسجيل."</div>
+        <div class="comment">"الشرح واضح وخطوات بسيطة."</div>
+        <div class="comment">"استفدت من فكرة المكافأة بشكل جيد."</div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="card">
+      <h2 class="title">أسئلة شائعة</h2>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">هل التسجيل مجاني؟</div>
+        <div class="faq-a">نعم، التسجيل مجاني بالكامل.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">هل الأرباح مضمونة؟</div>
+        <div class="faq-a">النتائج تختلف من شخص لآخر حسب طريقة الاستخدام.</div>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="card" id="formSection">
+      <h2 class="title">سجّل الآن للحصول على المكافأة</h2>
+      <p>يرجى إدخال بياناتك كما هي مكتوبة في بطاقة الهوية أو جواز السفر</p>
+      <form id="regForm">
+        <input type="text" id="name" placeholder="الاسم الكامل (كما في البطاقة)" required>
+        <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+        <input type="text" id="country" placeholder="الدولة (كما في البطاقة)" required>
+        <select id="document" required>
+          <option value="">اختر نوع المستند</option>
+          <option>بطاقة شخصية</option>
+          <option>جواز سفر</option>
+          <option>إقامة</option>
+          <option>رخصة قيادة</option>
+        </select>
+        <button class="btn" type="submit">إرسال البيانات</button>
+      </form>
+      <div class="msg" id="status"></div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="card">
+      <h2 class="title">لوحة التحكم</h2>
+      <div id="dataBox">لا توجد بيانات محفوظة</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WhatsApp Button -->
+<a class="whatsapp" target="_blank"
+   href="https://wa.me/967739399064?text=أريد%20التسجيل%20في%20المكافآت%20الترحيبية">
+💬 واتساب
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
