@@ -3,151 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة التسجيل الاحترافية</title>
+<title>نظام المكافآت الترويجية | سجل الآن</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-    /* التنسيق الأساسي المستوحى من الكود الثاني */
-    body {margin:0;font-family:Arial, sans-serif;background:#020617;color:#fff;text-align:center; scroll-behavior: smooth;}
-    input,button{width:90%;padding:12px;margin:8px;border-radius:8px;border:none;outline:none;box-sizing: border-box;}
-    input{background:#1e293b;color:#fff;border:1px solid #334155}
-    button{background:#22c55e;color:#fff;font-size:16px;cursor:pointer;font-weight:bold;transition:0.3s}
-    button:hover{background:#16a34a; transform: scale(1.02);}
-    button:disabled{background:#475569;cursor:not-allowed}
-    .card{background:#111;padding:20px;border-radius:12px;margin:15px;border:1px solid #222}
-    
-    /* تنسيق الصور في قسم الآراء */
-    .user-img {border-radius:50%; width: 50px; height: 50px; margin-bottom: 10px;}
-    .stars {color:gold; margin: 5px 0;}
-    
-    /* التنبيه العائم */
-    #notify {
-        position:fixed;bottom:20px;left:20px;background:#1e293b;
-        padding:12px;border-radius:10px;display:none;
-        border:1px solid #22c55e;z-index:9999;box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
+    :root { --primary: #22c55e; --bg: #020617; --card-bg: #0f172a; }
+    body { margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color:#fff; text-align:center; scroll-behavior: smooth; }
+    input, button, select { width:90%; padding:14px; margin:10px auto; border-radius:10px; border:none; outline:none; box-sizing: border-box; display: block; font-family: 'Tajawal'; }
+    input, select { background:#1e293b; color:#fff; border:1px solid #334155; }
+    button, .btn { background: var(--primary); color:#fff; font-size:18px; cursor:pointer; font-weight:bold; transition:0.3s; border:none; text-decoration: none; display: inline-block; }
+    button:hover { background:#16a34a; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3); }
+    .card { background: var(--card-bg); padding:25px; border-radius:15px; margin:20px auto; border:1px solid #1e293b; max-width: 600px; width: 90%; }
+    .hero { background: linear-gradient(135deg, #1e293b 0%, #020617 100%); padding: 60px 20px; border-bottom: 2px solid var(--primary); }
+    .stars { color: gold; font-size: 14px; margin-bottom: 5px; }
+    .testimonial-scroll { height: 300px; overflow-y: auto; text-align: right; padding: 10px; background: #020617; border-radius: 10px; }
+    .faq-item { background: #1e293b; margin: 10px 0; border-radius: 8px; text-align: right; overflow: hidden; }
+    .faq-q { padding: 15px; cursor: pointer; font-weight: bold; background: #334155; display: flex; justify-content: space-between; }
+    .faq-a { padding: 0; max-height: 0; transition: 0.3s ease-out; color: #cbd5e1; font-size: 0.9rem; }
+    .whatsapp { position:fixed; bottom:25px; right:25px; background:#25D366; color:white; padding:15px 25px; border-radius:50px; text-decoration:none; font-weight:bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1000; }
+    #notify { position:fixed; bottom:20px; left:20px; background: var(--card-bg); padding:15px; border-radius:10px; display:none; border-right: 5px solid var(--primary); z-index: 999; }
 </style>
 </head>
 
 <body>
 
-<div style="background:#dc2626;padding:10px;font-weight:bold;position: sticky;top: 0;z-index: 1000;">
-⚡ الأماكن محدودة – سجل الآن للحصول على العرض
+<div style="background:#dc2626; padding:12px; font-weight:900; position: sticky; top:0; z-index:1001; font-size: 1.1rem;">
+🔥 فرصة نادرة: احصل على بونص 30$ مجاناً الآن!
 </div>
 
-<section style="padding:50px 20px;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 10px;">ابدأ الآن 🚀</h1>
-    <p style="color: #cbd5e1; font-size: 1.1rem;">سجل بياناتك وانضم إلى نخبة المتداولين بسهولة</p>
+<section class="hero">
+    <h1 style="font-size: 2.2rem; margin-top:0;">ابدأ التداول بـ 0 ريال! 💵</h1>
+    <p style="font-size: 1.2rem; color: #cbd5e1;">سجّل الآن واحصل على بونص 30$ مجاني + نظام ربح 50/50</p>
+    <p style="background: rgba(34,197,94,0.1); padding: 10px; border-radius: 8px; color: #4ade80;">💡 <b>ميزة الدعوة:</b> اربح 30% من أرباح أصدقائك للأبد!</p>
     <br>
-    <a href="#form" style="background:#22c55e;padding:15px 30px;border-radius:10px;color:#fff;text-decoration:none;font-weight:bold;box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);">ابدأ التسجيل الآن</a>
+    <a href="#formSection" class="btn" style="padding: 15px 40px;">سجل بياناتك الآن</a>
 </section>
 
-<div style="display:flex;justify-content:space-around; background: #0f172a; padding: 20px 0;">
-    <div><h2 id="users" style="color: #22c55e; margin:0;">0</h2><p style="margin:5px 0;">مستخدم نشط</p></div>
-    <div><h2 id="countries" style="color: #22c55e; margin:0;">0</h2><p style="margin:5px 0;">دولة مغطاة</p></div>
+<div class="card" style="display:flex; justify-content: space-around; flex-wrap: wrap; gap: 10px;">
+    <div><h2 id="users" style="color:var(--primary); margin:0;">0</h2><p>مستخدم</p></div>
+    <div><h2 style="color:var(--primary); margin:0;">50/50</h2><p>تقسيم الأرباح</p></div>
+    <div><h2 id="payouts" style="color:var(--primary); margin:0;">0</h2><p>أرباح موزعة ($)</p></div>
 </div>
 
-<div id="form" class="card" style="max-width: 500px; margin: 30px auto;">
-    <h2 style="margin-top: 0;">📥 استمارة الانضمام</h2>
-    <p style="color: #94a3b8; font-size: 0.9rem;">يرجى إدخال بياناتك بدقة لنتواصل معك</p>
-    
-    <input id="name" type="text" placeholder="الاسم الكامل">
-    <input id="country" type="text" placeholder="الدولة">
-    <input id="phone" type="tel" placeholder="رقم الواتساب (مع مفتاح الدولة)">
-    
-    <button id="sendBtn" onclick="send()">إرسال البيانات وتأكيد الحجز ✅</button>
-</div>
-
-<div style="padding:20px;">
-    <h2 style="color: #22c55e;">⭐ ماذا يقول عنا المشتركون؟</h2>
-    
-    <div class="card" style="max-width: 400px; margin: 15px auto;">
-        <img src="https://i.pravatar.cc/100?img=11" class="user-img" alt="user">
-        <p><strong>محمد العبسي - اليمن</strong></p>
-        <div class="stars">★★★★★</div>
-        <p style="color: #94a3b8;">"تجربة استثنائية، الرد كان سريع جداً والخدمة فوق الممتازة."</p>
+<div class="card">
+    <h2 style="color:var(--primary)">❓ أسئلة شائعة</h2>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">هل التسجيل مجاني فعلاً؟ <span>+</span></div>
+        <div class="faq-a"><p style="padding:15px;">نعم، لن تدفع ريالاً واحداً. نحن نوفر لك البونص لبدء التداول.</p></div>
     </div>
-
-    <div class="card" style="max-width: 400px; margin: 15px auto;">
-        <img src="https://i.pravatar.cc/100?img=12" class="user-img" alt="user">
-        <p><strong>أحمد التميمي - السعودية</strong></p>
-        <div class="stars">★★★★★</div>
-        <p style="color: #94a3b8;">"نظام احترافي جداً وشفافية عالية في التعامل."</p>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFAQ(this)">كيف أربح من دعوة الأصدقاء؟ <span>+</span></div>
+        <div class="faq-a"><p style="padding:15px;">عندما يسجل صديقك عبر رابطك، تحصل أنت وهو على 30% من أرباحه، ونحن نأخذ 40% فقط كإدارة.</p></div>
     </div>
 </div>
 
-<div class="card" style="max-width: 500px; margin: 20px auto;">
-    <h3>📞 قنوات الدعم الفني</h3>
-    <a href="https://wa.me/967739399064?text=أريد%20التسجيل" target="_blank"><button style="background:#25D366">واتساب مباشر</button></a>
-    <a href="https://t.me/A_VIP_B" target="_blank"><button style="background:#0088cc">قناة التيليجرام</button></a>
-    <a href="https://t.me/VIPA_BBOT" target="_blank"><button style="background:#1e40af">بوت الخدمة الآلي</button></a>
+<div class="card" id="formSection">
+    <h2 style="margin-top:0;">📥 استمارة التسجيل</h2>
+    <p style="font-size: 0.9rem; color: #94a3b8;">تأكد من كتابة الاسم كما هو في هويتك لضمان استلام البونص</p>
+    <input type="text" id="name" placeholder="الاسم الكامل (كما في الهوية)">
+    <input type="text" id="country" placeholder="الدولة">
+    <input type="tel" id="phone" placeholder="رقم الواتساب">
+    <select id="document">
+        <option value="">اختر نوع المستند للتأكيد</option>
+        <option>بطاقة شخصية</option>
+        <option>جواز سفر</option>
+        <option>رخصة قيادة / إقامة</option>
+    </select>
+    <button id="sendBtn" onclick="send()">إرسال البيانات واستلام 30$ ✅</button>
 </div>
 
-<a href="https://wa.me/967739399064?text=أريد%20الاستفسار" target="_blank"
-style="position:fixed;bottom:25px;right:25px;background:#25D366;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow: 0 4px 20px rgba(0,0,0,0.4);z-index: 1000;">
-    <span style="font-size:30px;">💬</span>
+<div class="card">
+    <h2 style="color:var(--primary)">⭐ تجارب المشتركين (1500+)</h2>
+    <div class="testimonial-scroll" id="reviews">
+        </div>
+</div>
+
+<a class="whatsapp" target="_blank" href="https://wa.me/967739399064?text=أريد%20التسجيل%20في%20المكافأة%20الترحيبية">
+💬 تواصل واتساب
 </a>
 
 <div id="notify"></div>
 
 <script>
-// 📊 منطق العدادات المتزايدة
-let uCount=0, cCount=0;
-setInterval(()=>{ if(uCount < 1280){ uCount += 14; document.getElementById("users").innerText = uCount + "+"; }}, 50);
-setInterval(()=>{ if(cCount < 22){ cCount++; document.getElementById("countries").innerText = cCount; }}, 150);
+// 1. نظام العدادات
+let u=0, p=0;
+setInterval(()=>{if(u<2540){u+=15; document.getElementById("users").innerText=u+"+";}}, 50);
+setInterval(()=>{if(p<8500){p+=120; document.getElementById("payouts").innerText=p+"+";}}, 50);
 
-// 🔔 منطق الإشعارات الوهمية لزيادة الثقة
-const names=["سعيد كمال","أبو أحمد","خالد منصور","فهد العتيبي","ياسين","عبدالرحمن"];
-const places=["حضرموت","القاهرة","الرياض","دبي","عمان"];
+// 2. الأسئلة الشائعة
+function toggleFAQ(el) {
+    const ans = el.nextElementSibling;
+    ans.style.maxHeight = ans.style.maxHeight ? null : ans.scrollHeight + "px";
+}
+
+// 3. توليد 15 تجربة مستخدم
+const feedbacks = [
+    {n:"خالد منصور", c:"السعودية", t:"أفضل نظام شفته، استلمت البونص وبدأت أربح فعلياً."},
+    {n:"سارة الأحمد", c:"الكويت", t:"شرح واضح ومصداقية عالية جداً في التعامل."},
+    {n:"عمر الحبيشي", c:"اليمن", t:"نظام الإحالة جبار! ربحت من تسجيل أصحابي أكثر من تداولي."},
+    {n:"ياسين القحطاني", c:"الإمارات", t:"ما كنت مصدق في البداية، لكن الدعم تواصلوا معي وفعلوا الحساب."},
+    {n:"محمد الدوسري", c:"السعودية", t:"شكراً لكم على هذه الفرصة، 30 دولار كانت بداية خير."},
+    {n:"إبراهيم حسن", c:"مصر", t:"منظمة جداً والخطوات بسيطة لأي مبتدئ."},
+    {n:"ليلى محمود", c:"الأردن", t:"سجلت بجواز السفر وتم القبول في أقل من 24 ساعة."},
+    {n:"عبدالله الشمري", c:"العراق", t:"التعامل راقي جداً والربح بيتحول بانتظام."},
+    {n:"فهد البقمي", c:"السعودية", t:"أنصح الكل يسجل ما بتخسر شيء، التجربة خير برهان."},
+    {n:"مريم صالح", c:"عمان", t:"البونص ساعدني أجرب التداول بدون مخاطرة برأس مالي."},
+    {n:"سلطان هزاع", c:"اليمن", t:"خدمة ممتازة، التواصل عبر الواتساب كان سريع."},
+    {n:"منصور العتيبي", c:"السعودية", t:"فكرة تقسيم الأرباح عادلة جداً للطرفين."},
+    {n:"أحمد زكي", c:"مصر", t:"أفضل بوت تسجيل تعاملت معه، دقيق وسريع."},
+    {n:"نواف الرشيدي", c:"الكويت", t:"المكافآت حقيقية وتمت إضافة الرصيد لمحفظتي."},
+    {n:"ريان جابر", c:"الإمارات", t:"خمس نجوم قليل في حقكم، استمروا يا أبطال."}
+];
+
+const reviewsBox = document.getElementById("reviews");
+feedbacks.forEach(f => {
+    reviewsBox.innerHTML += `
+        <div style="border-bottom:1px solid #1e293b; padding:10px 0;">
+            <div class="stars">★★★★★</div>
+            <strong style="color:var(--primary)">${f.n} (${f.c})</strong>
+            <p style="font-size:0.85rem; margin:5px 0;">${f.t}</p>
+        </div>
+    `;
+});
+
+// 4. الإشعارات
 setInterval(()=>{
-    let n = names[Math.floor(Math.random()*names.length)];
-    let p = places[Math.floor(Math.random()*places.length)];
-    const box = document.getElementById("notify");
-    box.innerHTML = `🔔 <b>${n}</b> من <b>${p}</b> سجل الآن!`;
-    box.style.display = "block";
-    setTimeout(()=> box.style.display="none", 4500);
-}, 12000);
+    const f = feedbacks[Math.floor(Math.random()*feedbacks.length)];
+    const n = document.getElementById("notify");
+    n.innerHTML = `🔔 <b>${f.n}</b> سجل الآن واستلم المكافأة!`;
+    n.style.display = "block";
+    setTimeout(()=>n.style.display="none", 4000);
+}, 10000);
 
-// 📤 إرسال البيانات للسيرفر (الربط التقني)
+// 5. الإرسال للسيرفر
 async function send(){
     const btn = document.getElementById("sendBtn");
-    const name = document.getElementById("name").value;
-    const country = document.getElementById("country").value;
-    const phone = document.getElementById("phone").value;
+    const data = {
+        name: document.getElementById("name").value,
+        country: document.getElementById("country").value,
+        phone: document.getElementById("phone").value,
+        document: document.getElementById("document").value
+    };
 
-    if(!name || !country || !phone){
-        alert("يرجى إدخال كافة البيانات المطلوبة ⚠️");
+    if(!data.name || !data.country || !data.document){
+        alert("يرجى إكمال البيانات الأساسية واختيار نوع المستند ⚠️");
         return;
     }
 
     btn.disabled = true;
-    btn.innerText = "جاري التأكيد... ⏳";
+    btn.innerText = "جاري الحجز... ⏳";
 
     try {
-        const response = await fetch("/api/register", {
+        const res = await fetch("/api/register", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                name: name,
-                country: country,
-                phone: phone,
-                document: "طلب عبر المنصة الاحترافية V2"
-            })
+            body: JSON.stringify(data)
         });
-
-        if(response.ok) {
-            alert("✅ تم استلام طلبك بنجاح! سيقوم فريقنا بالتواصل معك عبر الواتساب فوراً.");
-            document.getElementById("name").value = "";
-            document.getElementById("country").value = "";
-            document.getElementById("phone").value = "";
-        } else {
-            alert("❌ حدث خطأ، يرجى المحاولة مرة أخرى.");
-        }
-    } catch (err) {
-        alert("🌐 فشل الاتصال بالسيرفر، تأكد من إنترنت جهازك.");
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "إرسال البيانات وتأكيد الحجز ✅";
-    }
+        if(res.ok) {
+            alert("تم إرسال بياناتك! تواصل معنا عبر الواتساب لتفعيل البونص فوراً ✅");
+            window.location.href = "https://wa.me/967739399064?text=أتممت%20التسجيل%20باسم:%20" + data.name;
+        } else { alert("خطأ في السيرفر"); }
+    } catch(e) { alert("فشل الاتصال"); }
+    finally { btn.disabled = false; btn.innerText = "إرسال البيانات واستلام 30$ ✅"; }
 }
 </script>
 
