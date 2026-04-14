@@ -1,12 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const axios = require('axios');
 const app = express();
 
-// ⚠️ تعديل 1: Vercel لا يحتاج لتعريف البورت يدوياً أو استخدام app.listen
-// app.use(bodyParser.json()); // استبدلها بـ express.json() أسرع وأحدث
 app.use(express.json());
+
+// توجيه السيرفر لقراءة ملفات الواجهة من مجلد public
 app.use(express.static('public'));
 
 app.post('/api/register', async (req, res) => {
@@ -17,7 +16,6 @@ app.post('/api/register', async (req, res) => {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
-    // تأكد من وجود القيم قبل إرسال الطلب لتجنب كراش السيرفر
     if (!botToken || !chatId) {
         console.error("Missing Environment Variables!");
         return res.status(500).json({ error: 'إعدادات البوت غير مكتملة على السيرفر.' });
@@ -45,6 +43,8 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// ⚠️ تعديل 2: تصدير التطبيق بدلاً من app.listen
-// هذا هو السر لعمل Node.js على Vercel كـ Serverless Function
-module.exports = app; 
+// ⚠️ تشغيل السيرفر ليتوافق مع Render
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
