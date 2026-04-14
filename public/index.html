@@ -3,170 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام المكافآت الترويجية | التسجيل الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>نظام المكافآت الذكي | المنصة الرسمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/css/intlTelInput.css">
     
     <style>
-        :root { --primary: #22c55e; --bg: #020617; --card-bg: #0f172a; --text: #f8fafc; }
-        body { margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); text-align:center; scroll-behavior: smooth; }
-        .card { background: var(--card-bg); padding:20px; border-radius:15px; margin:15px auto; border:1px solid #1e293b; max-width: 600px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        input, select, button, .iti { width:100% !important; margin:10px auto; display: block; }
-        input, select { padding:14px; border-radius:10px; border:1px solid #334155; background:#1e293b; color:#fff; font-family: 'Tajawal'; box-sizing: border-box; text-align: right; }
-        button { background: var(--primary); color:#fff; font-weight:bold; cursor:pointer; padding:15px; border:none; border-radius:10px; transition: 0.3s; width: 100%; }
-        .hero { padding: 40px 20px; background: linear-gradient(180deg, #0f172a 0%, #020617 100%); border-bottom: 2px solid var(--primary); }
-        .urgent-bar { background:#dc2626; padding:10px; font-weight:900; position: sticky; top:0; z-index:1001; }
-        
-        /* تنسيق الشرح */
-        .how-it-works { text-align: right; padding: 10px; }
-        .step { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
-        .step-icon { background: var(--primary); color: white; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        :root { 
+            --primary: #22c55e; 
+            --primary-glow: rgba(34, 197, 94, 0.2);
+            --bg: #020617; 
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border: rgba(51, 65, 85, 0.5);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-        /* تنسيق التجارب المصححة */
-        .review-item { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #1e293b; text-align: right; }
-        .profile-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
-        
-        .iti__country-list { background-color: #1e293b; color: white; text-align: left; max-width: 300px; }
-        .iti--separate-dial-code .iti__selected-dial-code { color: white; }
+        body { 
+            margin:0; 
+            font-family: 'Tajawal', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 60%);
+            background-attachment: fixed;
+        }
+
+        /* شريط عاجل بتأثير نبضي */
+        .urgent-bar { 
+            background: linear-gradient(90deg, #dc2626, #991b1b);
+            padding: 12px; 
+            font-weight: 700; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1001; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-size: 0.95rem;
+        }
+
+        .container { max-width: 650px; margin: 0 auto; padding: 0 15px; }
+
+        /* الهيرو */
+        .hero { padding: 60px 0 40px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
+
+        /* كروت بتأثير زجاجي */
+        .glass-card { 
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .section-title { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 25px; 
+            color: var(--primary); 
+            font-size: 1.4rem;
+        }
+
+        /* خطوات العمل */
+        .step-item { display: flex; gap: 20px; margin-bottom: 25px; text-align: right; }
+        .step-number { 
+            background: var(--primary); 
+            color: white; 
+            min-width: 35px; 
+            height: 35px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 900;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* الفورم المطور */
+        .form-group { margin-bottom: 20px; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-dim); font-size: 0.9rem; }
+        input, select { 
+            width: 100%; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            background: rgba(30, 41, 59, 0.5); 
+            color: #fff; 
+            font-family: 'Tajawal';
+            font-size: 1rem;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus { border-color: var(--primary); outline: none; background: rgba(30, 41, 59, 0.8); }
+
+        .btn-submit { 
+            width: 100%; 
+            padding: 18px; 
+            border-radius: 15px; 
+            border: none; 
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff; 
+            font-weight: 700; 
+            font-size: 1.1rem;
+            cursor: pointer; 
+            transition: 0.4s;
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 25px var(--primary-glow); filter: brightness(1.1); }
+
+        /* تجارب المستخدمين */
+        .review-card { 
+            background: rgba(2, 6, 23, 0.5); 
+            border-radius: 16px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            display: flex; 
+            gap: 15px; 
+            align-items: center;
+        }
+        .user-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+        .rating { color: #facc15; font-size: 0.8rem; margin-bottom: 4px; }
+
+        /* الهاتف */
+        .iti { width: 100% !important; margin-bottom: 20px; }
+        .iti__country-list { background: #0f172a; border: 1px solid var(--border); border-radius: 12px; }
+
+        footer { text-align: center; padding: 40px 0; color: var(--text-dim); font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-<div class="urgent-bar">⚡ الأماكن محدودة – سجل الآن واحصل على بونص 30$ مجاناً</div>
+<div class="urgent-bar"><i class="fas fa-bolt"></i> عرض حصري: تبقى 9 مقاعد فقط للحصول على بونص الـ 30$ مجاناً!</div>
 
-<section class="hero">
-    <h1>ابدأ التداول مجاناً 🚀</h1>
-    <p>احصل على رأس مال ترحيبي دون الحاجة لإيداع أي مبلغ من جيبك</p>
-</section>
+<div class="container">
+    <header class="hero">
+        <h1>مستقبلك يبدأ هنا 🚀</h1>
+        <p>انضم إلى آلاف المتداولين الذين بدأوا رحلتهم برأس مال ترحيبي مقدم من النظام بالكامل.</p>
+    </header>
 
-<div class="card">
-    <h2 style="color:var(--primary); text-align: right;">💡 لماذا هذا النظام مجاني؟</h2>
-    <div class="how-it-works">
-        <div class="step">
-            <div class="step-icon">1</div>
-            <div><strong>بدء فوري:</strong> التسجيل وتفعيل الحساب لا يتطلب أي رسوم مالية نهائياً.</div>
+    <div class="glass-card">
+        <div class="section-title"><i class="fas fa-info-circle"></i> دليل العمل الذكي</div>
+        <div class="step-item">
+            <div class="step-number">1</div>
+            <div>
+                <b style="color: var(--primary)">تسجيل مجاني 100%</b>
+                <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-dim)">لا توجد رسوم خفية أو مصاريف إدارية. التسجيل متاح للجميع مجاناً.</p>
+            </div>
         </div>
-        <div class="step">
-            <div class="step-icon">2</div>
-            <div><strong>بونص حقيقي:</strong> نمنحك 30$ كبونص ترحيبي لبدء التداول فور تفعيل الهوية.</div>
+        <div class="step-item">
+            <div class="step-number">2</div>
+            <div>
+                <b style="color: var(--primary)">تفعيل المكافأة</b>
+                <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-dim)">بمجرد التحقق من بياناتك، ستحصل على بونص 30$ في حسابك للتداول الفوري.</p>
+            </div>
         </div>
-        <div class="step">
-            <div class="step-icon">3</div>
-            <div><strong>تقاسم الأرباح:</strong> نعتمد مبدأ الشراكة؛ أنت تربح 50% من الأرباح المحققة ونحن النصف الآخر.</div>
-        </div>
-        <div class="step">
-            <div class="step-icon">4</div>
-            <div><strong>حماية من الخسارة:</strong> في حال الخسارة، النظام هو من يتحملها بالكامل؛ لا يُطلب منك دفع أي شيء.</div>
+        <div class="step-item">
+            <div class="step-number">3</div>
+            <div>
+                <b style="color: var(--primary)">نظام الشراكة العادل</b>
+                <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-dim)">أنت تعمل ونحن نوفر لك رأس المال. الأرباح تُقسم بالتساوي (50/50) بيننا.</p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="card" id="formSection">
-    <h2 style="color:var(--primary); margin-top:0;">📥 استمارة الحجز الرسمي</h2>
-    <input type="text" id="name" placeholder="الاسم الكامل كما في الهوية">
-    
-    <select id="countrySelect" onchange="checkOtherCountry(this)">
-        <option value="">-- اختر الدولة --</option>
-        <option value="اليمن">اليمن</option>
-        <option value="السعودية">السعودية</option>
-        <option value="الإمارات">الإمارات</option>
-        <option value="مصر">مصر</option>
-        <option value="الكويت">الكويت</option>
-        <option value="قطر">قطر</option>
-        <option value="عمان">عمان</option>
-        <option value="البحرين">البحرين</option>
-        <option value="الأردن">الأردن</option>
-        <option value="العراق">العراق</option>
-        <option value="لبنان">لبنان</option>
-        <option value="فلسطين">فلسطين</option>
-        <option value="سوريا">سوريا</option>
-        <option value="ليبيا">ليبيا</option>
-        <option value="تونس">تونس</option>
-        <option value="الجزائر">الجزائر</option>
-        <option value="المغرب">المغرب</option>
-        <option value="السودان">السودان</option>
-        <option value="موريتانيا">موريتانيا</option>
-        <option value="Other">دولة أخرى...</option>
-    </select>
-    <input type="text" id="otherCountry" placeholder="اكتب اسم دولتك هنا" style="display:none;">
+    <div class="glass-card" id="form">
+        <div class="section-title"><i class="fas fa-id-card"></i> استمارة البيانات الرسمية</div>
+        
+        <div class="form-group">
+            <label>الاسم الكامل (مطابق للهوية)</label>
+            <input type="text" id="name" placeholder="مثال: محمد عبدالله القحطاني">
+        </div>
 
-    <input type="tel" id="phone">
-    
-    <select id="document">
-        <option value="">-- نوع وثيقة التأكيد --</option>
-        <option>بطاقة شخصية</option>
-        <option>جواز سفر</option>
-        <option>رخصة قيادة / إقامة</option>
-    </select>
-    
-    <button id="sendBtn" onclick="send()">إرسال واستلام المكافأة ✅</button>
-</div>
+        <div class="form-group">
+            <label>دولة الإقامة</label>
+            <select id="countrySelect" onchange="toggleOther(this)">
+                <option value="">-- اختر دولتك --</option>
+                <optgroup label="الدول الأكثر نشاطاً">
+                    <option value="اليمن">اليمن</option>
+                    <option value="السعودية">السعودية</option>
+                    <option value="الإمارات">الإمارات</option>
+                    <option value="مصر">مصر</option>
+                </optgroup>
+                <optgroup label="باقي الدول">
+                    <option value="الكويت">الكويت</option>
+                    <option value="عمان">عمان</option>
+                    <option value="البحرين">البحرين</option>
+                    <option value="الأردن">الأردن</option>
+                    <option value="العراق">العراق</option>
+                    <option value="المغرب">المغرب</option>
+                    <option value="Other">دولة أخرى...</option>
+                </optgroup>
+            </select>
+            <input type="text" id="otherCountry" placeholder="اكتب اسم دولتك هنا" style="display:none; margin-top:10px;">
+        </div>
 
-<div class="card">
-    <h2 style="color:var(--primary); margin-top:0;">⭐ آراء المشتركين المعتمدين</h2>
-    <div id="reviewsContainer"></div>
+        <div class="form-group">
+            <label>رقم الهاتف (واتساب)</label>
+            <input type="tel" id="phone">
+        </div>
+
+        <div class="form-group">
+            <label>وثيقة التحقق</label>
+            <select id="docType">
+                <option value="">-- اختر نوع الوثيقة --</option>
+                <option>البطاقة الشخصية</option>
+                <option>جواز السفر الساري</option>
+                <option>رخصة القيادة / الإقامة</option>
+            </select>
+        </div>
+
+        <button class="btn-submit" id="sendBtn" onclick="submitData()">
+            <i class="fas fa-paper-plane"></i> إرسال وتفعيل البونص
+        </button>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title"><i class="fas fa-star"></i> قصص نجاح المشتركين</div>
+        
+        <div class="review-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="user-img">
+            <div style="text-align: right;">
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div style="font-weight: 700; font-size: 0.95rem;">خالد القحطاني - السعودية</div>
+                <div style="font-size: 0.85rem; color: var(--text-dim)">"المصداقية هي العنوان. استلمت الـ 30$ وبدأت العمل والنتائج مبشرة جداً."</div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="user-img">
+            <div style="text-align: right;">
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div style="font-weight: 700; font-size: 0.95rem;">ريم المنصوري - الإمارات</div>
+                <div style="font-size: 0.85rem; color: var(--text-dim)">"كنت مترددة في البداية لكونه مجاني، لكن الدعم الفني ساعدني في كل خطوة."</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 نظام المكافآت الترويجية | جميع الحقوق محفوظة<br>
+        الموقع مخصص للأغراض الترويجية والتعليمية.
+    </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
 <script>
-    const phoneInput = document.querySelector("#phone");
-    const iti = window.intlTelInput(phoneInput, {
+    // تهيئة حقل الهاتف الاحترافي
+    const phoneInp = document.querySelector("#phone");
+    const iti = window.intlTelInput(phoneInp, {
         separateDialCode: true,
         initialCountry: "auto",
         geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
     });
 
-    function checkOtherCountry(s) {
-        document.getElementById("otherCountry").style.display = (s.value === "Other") ? "block" : "none";
+    function toggleOther(sel) {
+        document.getElementById("otherCountry").style.display = (sel.value === "Other") ? "block" : "none";
     }
 
-    // تجارب مستخدمين حقيقية (تم تصحيح الصور حسب الجنس)
-    const reviews = [
-        {n:"أحمد منصور", c:"مصر", img:"https://i.pravatar.cc/100?img=11", com:"تجربة ممتازة، البونص حقيقي وبدأت التداول فوراً."},
-        {n:"محمد سالم", c:"اليمن", img:"https://i.pravatar.cc/100?img=12", com:"مصداقية عالية جداً، لم أدفع أي ريال للتسجيل."},
-        {n:"ليلى محمود", c:"الأردن", img:"https://i.pravatar.cc/100?img=5", com:"سجلت وتفعل حسابي خلال ساعات، شكراً لكم."},
-        {n:"مريم صالح", img:"https://i.pravatar.cc/100?img=10", com:"نظام واضح وسهل للمبتدئين في عالم المال."}
-    ];
-
-    document.getElementById('reviewsContainer').innerHTML = reviews.map(r => `
-        <div class="review-item">
-            <img src="${r.img}" class="profile-img">
-            <div>
-                <div style="color:gold; font-size:12px;">★★★★★</div>
-                <strong style="color:var(--primary)">${r.n}</strong>
-                <p style="margin:5px 0; font-size:0.85rem;">${r.com}</p>
-            </div>
-        </div>
-    `).join('');
-
-    async function send(){
+    async function submitData() {
         const btn = document.getElementById("sendBtn");
         const country = document.getElementById("countrySelect").value === "Other" ? document.getElementById("otherCountry").value : document.getElementById("countrySelect").value;
-        const data = {
+        
+        const payload = {
             name: document.getElementById("name").value,
             country: country,
             phone: iti.getNumber(),
-            document: document.getElementById("document").value
+            doc: document.getElementById("docType").value
         };
 
-        if(!data.name || !data.country || !data.document){ alert("يرجى إكمال كافة الحقول ⚠️"); return; }
-        
-        btn.disabled = true; btn.innerText = "جاري الحفظ... ⏳";
+        if(!payload.name || !payload.country || !payload.doc) {
+            alert("⚠️ يرجى تعبئة كافة الحقول بشكل صحيح");
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             });
             if(res.ok) {
-                alert("تم الإرسال! سيتم تحويلك الآن لتأكيد التفعيل.");
+                alert("✅ تم استلام بياناتك بنجاح! سيتم توجيهك الآن للتفعيل.");
                 window.location.href = "https://t.me/A_VIP_B";
             }
-        } catch(e) { alert("فشل الاتصال بالسيرفر"); }
-        finally { btn.disabled = false; btn.innerText = "إرسال واستلام المكافأة ✅"; }
+        } catch(e) {
+            alert("❌ فشل في الاتصال بالسيرفر، حاول مجدداً.");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال وتفعيل البونص';
+        }
     }
 </script>
 </body>
-    </html>
+</html>
