@@ -38,7 +38,7 @@
         .glass-card { 
             background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: right;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: right; position: relative;
         }
 
         h1, h2 { color: #fff; margin-top: 0; }
@@ -54,7 +54,7 @@
         .step-num { background: var(--primary); color: #fff; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; box-shadow: 0 0 10px var(--primary-glow);}
 
         /* الفورم */
-        .form-group { margin-bottom: 18px; }
+        .form-group { margin-bottom: 18px; position: relative; }
         label { display: block; margin-bottom: 6px; font-size: 0.95rem; color: var(--text-dim); font-weight: bold;}
         input, select { 
             width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); 
@@ -82,9 +82,18 @@
         .user-review:last-child { border-bottom: none; padding-bottom: 0; }
         .u-img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
-        /* مكتبة الهاتف */
-        .iti { width: 100%; display: block; }
-        .iti__country-list { background: #0f172a; color: #fff; border: 1px solid var(--border); text-align: left; max-width: 320px;}
+        /* مكتبة الهاتف (تم حل مشكلة القائمة هنا) */
+        .iti { width: 100%; display: block; position: relative; }
+        .iti__country-list { 
+            background: #0f172a !important; 
+            color: #fff !important; 
+            border: 1px solid var(--border) !important; 
+            text-align: left !important; 
+            max-width: 320px !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
+            z-index: 999999 !important; /* إجبار القائمة على الظهور فوق كل شيء */
+        }
         .iti--separate-dial-code .iti__selected-dial-code { color: #fff; }
 
         /* العناصر العائمة */
@@ -168,7 +177,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="z-index: 9999;">
             <label>رقم الهاتف (اختر رمز دولتك)</label>
             <input type="tel" id="phone">
         </div>
@@ -191,8 +200,7 @@
     <div class="glass-card">
         <div class="section-title"><i class="fas fa-star"></i> تجارب المشتركين المعتمدين</div>
         <p style="color:var(--text-dim); font-size:0.85rem; margin-top:-10px;">أحدث المنضمين الذين فعلوا البونص وبدأوا بالتداول</p>
-        <div id="reviewsContainer">
-            </div>
+        <div id="reviewsContainer"></div>
     </div>
 
     <div class="glass-card">
@@ -228,13 +236,14 @@
     setInterval(()=>{ if(c<18){ c++; document.getElementById('cCount').innerText = c; } }, 150);
     setInterval(()=>{ if(p<14500){ p+=120; document.getElementById('pCount').innerText = "+"+p; } }, 30);
 
-    // 2. نظام رقم الهاتف الدولي
+    // 2. نظام رقم الهاتف الدولي (تم إصلاح مكان ظهور القائمة هنا)
     const phoneInput = document.querySelector("#phone");
     const iti = window.intlTelInput(phoneInput, {
         separateDialCode: true,
         initialCountry: "auto",
         geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+        dropdownContainer: document.body // هذا السطر يمنع القائمة من التأثر بخلفية الزجاج ويجعلها تظهر تحت الحقل مباشرة
     });
 
     // 3. إظهار/إخفاء حقل "دولة أخرى"
@@ -271,7 +280,7 @@
 
         if (!storedData || (now - storedData.time > fourDays)) {
             const shuffled = allReviews.sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 3); // عرض 3 تجارب فقط لجمال التصميم
+            const selected = shuffled.slice(0, 3);
             storedData = { time: now, reviews: selected };
             localStorage.setItem('smart_reviews', JSON.stringify(storedData));
         }
