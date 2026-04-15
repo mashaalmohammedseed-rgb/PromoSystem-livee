@@ -13,8 +13,6 @@
         :root { --primary: #22c55e; --gold: #fbbf24; --bg: #020617; --card: rgba(15, 23, 42, 0.9); --border: rgba(51, 65, 85, 0.5); }
         body { margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color: #fff; background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 60%); background-attachment: fixed; line-height: 1.6; padding-bottom: 100px; text-align: right; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         <div class="glass-card" style="border: 1px solid var(--gold); background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(2, 6, 23, 0.9));">
     <div class="section-title" style="color: var(--gold);">
         <i class="fas fa-rocket"></i> طريقك لتحقيق أول 350$
@@ -36,6 +34,9 @@
         </p>
     </div>
 </div>
+        .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+ 
         #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(2, 6, 23, 0.9)); border: 2px solid var(--primary); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
         .ref-display { background: #0f172a; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin: 10px 0; font-family: monospace; font-size: 0.9rem; color: var(--primary); word-break: break-all; text-align: center; }
         
