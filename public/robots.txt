@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mashaalmohammedseed-rgb.github.io/PromoSystem-livee/sitemap.xml
