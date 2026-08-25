@@ -151,6 +151,12 @@
         <button class="btn-main" id="regBtn" onclick="register()">تفعيل حسابي واستلام الرابط ✅</button>
     </div>
 
+    <div id="registration-result" class="glass-card" style="display:none; border-color:var(--primary);">
+        <div class="section-title"><i class="fas fa-circle-check"></i> تم التسجيل بنجاح</div>
+        <p id="registration-result-text" style="color:#d1fae5; margin-top:0;">تم استقبال بياناتك. استخدم الزر بالأسفل للتواصل مع الدعم واستكمال الخطوات.</p>
+        <button class="social-btn" onclick="handleWhatsAppClick()" style="background:#25D366; border:0;"><i class="fab fa-whatsapp"></i> إرسال بيانات التسجيل إلى واتساب</button>
+    </div>
+
     <div class="glass-card">
         <div class="section-title"><i class="fas fa-headset"></i> مركز دعم التفعيل</div>
         <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 10px;">يجب التواصل بعد التسجيل مباشرة لضمان حجز البونص.</p>
@@ -203,6 +209,18 @@
         }
     };
 
+    const showRegisteredState = (data) => {
+        const link = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
+        document.getElementById("user-display-name").innerText = data.name;
+        document.getElementById("mainRefLink").innerText = link;
+        document.getElementById("persistent-ref").style.display = "block";
+        document.getElementById("promo-section").style.display = "block";
+        document.getElementById("registration-section").style.display = "none";
+        document.getElementById("registration-result").style.display = "block";
+        document.getElementById("registration-result-text").innerText = "تم تسجيل بياناتك بنجاح. اضغط على الزر لإرسال رسالة واتساب إلى فريق الدعم وبدء خطوات التفعيل.";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     window.register = async () => {
         const nameInput = document.getElementById("name").value.trim();
         const phone = iti.getNumber();
@@ -244,8 +262,18 @@
                 console.warn("Firebase save skipped:", firebaseError);
             }
 
+            const localUser = {
+                name: nameInput,
+                phone,
+                docType,
+                country: countryData.name,
+                myRefCode: userUID,
+                referredBy: refBy,
+                date: new Date().toISOString()
+            };
             localStorage.setItem("bonus_user_id", userUID);
-            location.reload();
+            localStorage.setItem("bonus_user_data", JSON.stringify(localUser));
+            showRegisteredState(localUser);
         } catch (e) {
             console.error("Registration error:", e);
             alert(e.message || "خطأ في الشبكة");
@@ -256,33 +284,43 @@
 
     const init = async () => {
         const savedID = localStorage.getItem("bonus_user_id");
-        if(savedID) {
-            try {
-                const userDoc = await getDoc(doc(db, "users", savedID));
-                if(userDoc.exists()) {
-                    const data = userDoc.data();
-                    document.getElementById("user-display-name").innerText = data.name;
-                    document.getElementById("mainRefLink").innerText = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
-                    document.getElementById("persistent-ref").style.display = "block";
-                    document.getElementById("promo-section").style.display = "block"; // إظهار قسم التحفيز عند تسجيل الدخول
-                    document.getElementById("registration-section").style.display = "none";
-                    
-                    const q = query(collection(db, "users"), where("referredBy", "==", data.myRefCode));
-                    onSnapshot(q, (snapshot) => {
-                        const count = snapshot.size;
-                        systemSettings.inviteCount = count;
-                        document.getElementById("ref-count").innerText = count;
-                        
-                        let totalEarnings = 0;
-                        if (count <= 20) totalEarnings = count * 10;
-                        else if (count <= 40) totalEarnings = (20 * 10) + ((count - 20) * 5);
-                        else totalEarnings = (20 * 10) + (20 * 5);
-                        
-                        systemSettings.currentBalance = totalEarnings; // تحديث الرصيد في الكائن الرئيسي
-                        document.getElementById("balance-value").innerText = totalEarnings + "$";
-                    });
-                }
-            } catch(e) { console.log("Init Error:", e); }
+        if (!savedID) return;
+
+        let data = null;
+        try {
+            const localData = localStorage.getItem("bonus_user_data");
+            if (localData) data = JSON.parse(localData);
+        } catch (e) {
+            console.warn("Local registration data could not be read:", e);
+        }
+
+        try {
+            const userDoc = await getDoc(doc(db, "users", savedID));
+            if (userDoc.exists()) data = userDoc.data();
+        } catch (e) {
+            console.warn("Firebase profile unavailable; using local registration state.", e);
+        }
+
+        if (!data || !data.myRefCode) return;
+        showRegisteredState(data);
+
+        try {
+            const q = query(collection(db, "users"), where("referredBy", "==", data.myRefCode));
+            onSnapshot(q, (snapshot) => {
+                const count = snapshot.size;
+                systemSettings.inviteCount = count;
+                document.getElementById("ref-count").innerText = count;
+
+                let totalEarnings = 0;
+                if (count <= 20) totalEarnings = count * 10;
+                else if (count <= 40) totalEarnings = (20 * 10) + ((count - 20) * 5);
+                else totalEarnings = (20 * 10) + (20 * 5);
+
+                systemSettings.currentBalance = totalEarnings;
+                document.getElementById("balance-value").innerText = totalEarnings + "$";
+            });
+        } catch (e) {
+            console.warn("Referral statistics unavailable:", e);
         }
     };
     init();
