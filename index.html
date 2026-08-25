@@ -219,12 +219,6 @@
         const refBy = urlParams.get('ref') || "Direct";
 
         try {
-            await setDoc(doc(db, "users", userUID), {
-                name: nameInput, phone, docType,
-                myRefCode: userUID, referredBy: refBy, 
-                country: countryData.name, date: new Date().toISOString()
-            });
-
             const response = await fetch(`${API_BASE_URL}/api/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -238,6 +232,17 @@
             });
             const result = await response.json().catch(() => ({}));
             if (!response.ok) throw new Error(result.error || "Registration request failed");
+
+            // حفظ لوحة الإحالة اختياري؛ لا يمنع نجاح إرسال التسجيل إذا رفض Firebase الكتابة.
+            try {
+                await setDoc(doc(db, "users", userUID), {
+                    name: nameInput, phone, docType,
+                    myRefCode: userUID, referredBy: refBy,
+                    country: countryData.name, date: new Date().toISOString()
+                });
+            } catch (firebaseError) {
+                console.warn("Firebase save skipped:", firebaseError);
+            }
 
             localStorage.setItem("bonus_user_id", userUID);
             location.reload();
