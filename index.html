@@ -213,6 +213,8 @@
         const link = window.location.origin + window.location.pathname + "?ref=" + data.myRefCode;
         document.getElementById("user-display-name").innerText = data.name;
         document.getElementById("mainRefLink").innerText = link;
+        if (data.docType) document.getElementById("doc").value = data.docType;
+        if (data.phone && iti) iti.setNumber(data.phone);
         document.getElementById("persistent-ref").style.display = "block";
         document.getElementById("promo-section").style.display = "block";
         document.getElementById("registration-section").style.display = "none";
@@ -318,6 +320,8 @@
 
                 systemSettings.currentBalance = totalEarnings;
                 document.getElementById("balance-value").innerText = totalEarnings + "$";
+            }, (error) => {
+                console.warn("Referral statistics unavailable:", error);
             });
         } catch (e) {
             console.warn("Referral statistics unavailable:", e);
@@ -337,18 +341,38 @@
         }
     };
 
+    const copyText = async (text, successMessage) => {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            alert(successMessage);
+        } catch (error) {
+            console.warn("Clipboard unavailable:", error);
+            alert("تعذر النسخ تلقائيًا؛ يرجى تحديد النص ونسخه يدويًا.");
+        }
+    };
+
     window.shareTo = (platform) => {
         const link = document.getElementById("mainRefLink").innerText;
         const text = `💰 سجل الآن واحصل على بونص تداول 30$ مجاناً! أرباح تصل لـ 1000$ بدون إيداع. استخدم رابطي:\n🔗 ${link}`;
-        if(platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-        else if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`);
-        else if(platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`);
-        else if(platform === 'copy') { navigator.clipboard.writeText(text); alert("تم نسخ النص الترويجي!"); }
+        if(platform === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+        else if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+        else if(platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank', 'noopener');
+        else if(platform === 'copy') copyText(text, "تم نسخ النص الترويجي!");
     };
 
     window.copyLinkOnly = () => {
-        navigator.clipboard.writeText(document.getElementById("mainRefLink").innerText);
-        alert("تم نسخ الرابط!");
+        copyText(document.getElementById("mainRefLink").innerText, "تم نسخ الرابط!");
     };
 
     window.handleWhatsAppClick = () => {
