@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://promo-system-ar.pages.dev/sitemap.xml
+Sitemap: https://promo-system-ar.pages.dev/sitemap.txt
